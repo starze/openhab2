@@ -1,0 +1,37 @@
+
+rule "nilan displaytext items concatenation"
+when 
+	Item Nilan_Display_Text_1_2 received update or
+        Item Nilan_Display_Text_3_4 received update or
+        Item Nilan_Display_Text_5_6 received update or
+        Item Nilan_Display_Text_7_8 received update or
+        Item Nilan_Display_Attr_1_8 received update or
+        Item Nilan_Display_Text_9_10 received update or
+        Item Nilan_Display_Text_11_12 received update or
+        Item Nilan_Display_Text_13_14 received update or
+        Item Nilan_Display_Text_15_16 received update or
+
+	System started
+then
+	var String formattedString = String::format("%s%s%s%s%s%s%s%s%s",Nilan_Display_Text_1_2.state, Nilan_Display_Text_3_4.state, Nilan_Display_Text_5_6.state, Nilan_Display_Text_7_8.state, Nilan_Display_Attr_1_8.state, Nilan_Display_Text_9_10.state, Nilan_Display_Text_11_12.state, Nilan_Display_Text_13_14.state, Nilan_Display_Text_15_16.state)
+	logInfo(">>> Display items <<<", formattedString)
+	nilan_generated_displaytext.postUpdate(formattedString)
+end
+
+
+
+rule "nilan date items concatenation"
+when
+        //Item Nilan_Time_Second received update or
+        Item Nilan_Time_Minute received update or
+        Item Nilan_Time_Hour received update or
+        Item Nilan_Time_Day received update or
+        Item Nilan_Time_Month received update or
+        Item Nilan_Time_Year received update or
+
+        System started
+then
+        var String formattedString = String::format("%s:%s %s.%s.%s",Nilan_Time_Hour.state, Nilan_Time_Minute.state, Nilan_Time_Day.state, Nilan_Time_Month.state, Nilan_Time_Year.state)
+        logInfo(">>> Datum Zusammenfassung <<<", formattedString)
+        nilan_generated_time.postUpdate(formattedString)
+end

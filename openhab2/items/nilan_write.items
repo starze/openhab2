@@ -1,0 +1,7 @@
+Group gNilanHolding (All, gNilan)
+Switch nilan_onoff	"Lüftung aktiv [%d]"		(gNilanHolding) {modbus="nilan2:0"}
+Number nilan_user_operation_mode "Betriebsart [%d]" (gNilanHolding) {modbus="nilan2:1"}
+Number nilan_vent "Lüfterstufe" (gNilanHolding) {modbus="nilan2:2"}
+Number nilan_user_tempset	"User temperature selection [%d °C]" (gNilanHolding) {modbus="nilan2:3"}
+Number nilan_exhaust_speed "Exhaust Speed [%d]" (gNilanHolding) {modbus="nilan3:0"}
+Number nilan_inlet_speed "Inlet Speed [%d]" (gNilanHolding) {modbus="nilan3:1"}

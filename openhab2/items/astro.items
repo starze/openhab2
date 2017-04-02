@@ -1,0 +1,20 @@
+Group Astro <sun_clouds> (gAll)
+
+//
+//DateTime    CurrDateTime        "Heute [%1$tA, %1$td.%1$tm.%1$tY]"                  <clock>     (Astro) { channel="ntp:ntp:local:dateTime" }
+String      SeasonName          "Jahreszeit [MAP(astro.map):%s]"                                (Astro) { channel="astro:sun:local:season#name" }
+//
+DateTime    SunsetTime          "Sonnenuntergang [%1$tH:%1$tM Uhr]"                 <sun>       (Astro) { channel="astro:sun:local:set#start" }
+DateTime    NightStartTime      "Nacht Beginn [%1$tH:%1$tM Uhr]"                    <moon>      (Astro) { channel="astro:sun:local:night#start" }
+DateTime    NightEndTime        "Nacht Ende [%1$tH:%1$tM Uhr]"                      <moon>      (Astro) { channel="astro:sun:local:night#end" }
+DateTime    SunriseTime         "Sonnenaufgang [%1$tH:%1$tM Uhr]"                   <sun>       (Astro) { channel="astro:sun:local:rise#end" }
+//
+String      DayPhase            "Tageszeit [MAP(astro.map):%s]"                                 (Astro) { channel="astro:sun:local:phase#name" }
+Switch      NightState          "Nacht"                                                         (Astro)
+//
+Number      SunElevation        "Sonnenhöhe [%.1f °]"                               <sun>       (Astro) { channel="astro:sun:local:position#elevation" }
+String      Zodiac              "Tierkreiszeichen [MAP(astro.map):%s]"              <sun>       (Astro) { channel="astro:sun:local:zodiac#sign" }
+Number      MoonElevation       "Mondhöhe [%.1f °]"                                 <moon>      (Astro) { channel="astro:moon:local:position#elevation" }
+String      MoonPhase           "Mondphase [MAP(astro.map):%s]"                     <moon>      (Astro) { channel="astro:moon:local:phase#name" }
+DateTime    MoonFull            "Nächster Vollmond [%1$td.%1$tm.%1$tY, %1$tH:%1$tM Uhr]" <moon> (Astro) { channel="astro:moon:local:phase#full" }
+DateTime    MoonNew             "Nächster Neumond [%1$td.%1$tm.%1$tY, %1$tH:%1$tM Uhr]" <moon>  (Astro) { channel="astro:moon:local:phase#new" }

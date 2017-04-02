@@ -1,0 +1,3 @@
+Group All
+Group gNilan "Alle Modbus Attribute (input + holding)" (All)
+Group gNilanInput "Alle Sensoren" (gNilan)

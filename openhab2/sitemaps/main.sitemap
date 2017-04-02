@@ -1,0 +1,146 @@
+sitemap main label="Main Menu"
+{
+	Frame label="Weltenempfänger" {
+		Text item=CurrDateTime label="Wetter und Astro" icon="sun_clouds" {
+			Frame label="Jetzt" {
+		                Text item=SunriseTime icon="sunrise"
+                		Text item=SunsetTime icon="sunset" 
+		                Text item=SunElevation icon="sunmoon" visibility=[SunElevation > 0]
+                		Text item=MoonElevation icon="sunmoon" visibility=[MoonElevation > 0]
+		                Text item=MoonPhase
+				Text item=Zodiac icon="zodiac"
+				Text item=MoonFull icon="fullmoon" visibility=[MoonPhase == WAXING_CRESCENT, MoonPhase == FIRST_QUARTER, MoonPhase == WAXING_GIBBOUS, MoonPhase == FULL]
+				Text item=MoonNew icon="fullmoon" visibility=[MoonPhase == WANING_GIBBOUS, MoonPhase == THIRD_QUARTER, MoonPhase == WANING_CRESCENT, MoonPhase == NEW]
+			}
+        }
+	}
+	
+	Frame label="Heizung und Lüftung" {
+		Text item=nilan icon="fan" label="Nilan Lüftungsanlage" {
+ 			Frame label="Übersicht" {
+				Default item=nilan_generated_displaytext	
+				Default item=nilan_generated_time
+				Switch item=nilan_onoff
+				//Text item=Nilan_Control_RunAct label="Actual on/off state [%d]"
+				//Text	item=Nilan_Control_RunSet mappings=[0="Off", 1="On"]	
+				
+				Switch item=nilan_vent icon="fan_ceiling" mappings=[0="Off", 1="1", 2="2", 3="3", 4="4"]
+				Text item=nilan_exhaust_speed label="Auslassgeschwindigkeit" icon="fan"
+				Text item=nilan_inlet_speed label="Einlassgeschwindigkeit" icon="fan"
+				//Text	item=Nilan_Control_VentSet	
+				
+				//Selection item=nilan_user_operation_mode mappings=[0="Off", 1="Heat", 2="Cool", 3="AUTO", 4="Service"]
+				Selection item=Nilan_Control_ModeAct  label="Betriebsart [%d]" mappings=[0="Off", 1="Heat", 2="Cool", 3="Auto", 4="Service"]
+				//Text item=Nilan_Control_ModeSet mappings=[0="Off", 1="Heat", 2="Cool", 3="AUTO", 4="Service"]	
+				
+				//Text	item=Nilan_Control_TempSet	
+				
+				
+				//Switch item=nilan_userfunc label="Überdruck für Feuerstätte aktiv [%d]" icon="fire"
+				Text item=Nilan_Output_UserFunc	icon="fire"
+				
+				//Text	item=Nilan_Output_UserFunc_2		
+				//Default item=Nilan_Input_UserFunc_2
+				
+			}
+			Frame label="Sensoren" {
+				Text item=Nilan_Input_T15_Room label="Wohnzimmer" 
+				Text item=Nilan_Input_T7_Inlet label="Raumauslass"
+				Text item=Nilan_Input_RH icon="humidity" label="Luftfeuchtigkeit"
+				Text item=Nilan_Input_T8_Outdoor label="Außentemperatur"
+			}
+			Frame label="Alarme" {	
+				Text	item=Nilan_Alarm_Reset		
+				Default item=Nilan_Input_AirFilter
+				Default item=Nilan_Input_DoorOpen  
+				Default item=Nilan_Input_Smoke      
+				Default item=Nilan_Input_MotorThermo 
+				Default item=Nilan_Input_Frost_Overht 
+				Default item=Nilan_Input_AirFlow       
+				Default item=Nilan_Input_P_HI 
+				Default item=Nilan_Input_Defrost  
+			
+				Default	item=Nilan_Alarm_Status
+				//Text	item=Nilan_Alarm_List_1_ID		"Alarm 1 - Code [%d]" 
+				//Text	item=Nilan_Alarm_List_1_Date		"Alarm 1 - Date [%d]" 
+				//Text	item=Nilan_Alarm_List_1_Time		"Alarm 1 - Time [%d]" 
+				//Text	item=Nilan_Alarm_List_2_ID		"Alarm 2 - Code [%d]" 
+				//Text	item=Nilan_Alarm_List_2_Date		"Alarm 2 - Date [%d]" 
+				//Text	item=Nilan_Alarm_List_2_Time		"Alarm 2 - Time [%d]" 
+				//Text	item=Nilan_Alarm_List_3_ID		"Alarm 3 - Code [%d]" 
+				//Text	item=Nilan_Alarm_List_3_Date		"Alarm 3 - Date [%d]" 
+				//Text	item=Nilan_Alarm_List_3_Time		"Alarm 3 - Time [%d]" 
+
+				Default item=Nilan_Display_LED_1	
+				Default item=Nilan_Display_LED_2
+				
+				Selection item=Nilan_Control_State  label="Actual control state [%d]" mappings=[0="Off", 1="Shift", 2="Stop", 3="Start", 4="Standby", 5="Ventilation stop", 6="Ventilation", 7="Heating", 8="Cooling", 9="Hot water", 10="Legionella", 11="Cooling + hot water", 12="Central heating", 13="Defrost", 14="Frost secure", 15="Service", 16="Alarm", 17="Heating + hot water"]
+				//Text item=Nilan_Control_SeclnState  label="Actual time in state [%d]"
+				Selection item=Nilan_Control_ServiceMode mappings=[0="Off", 1="Defrost", 2="Flaps", 3="Inlet", 4="Exhaust", 5="Compressor", 6="Heating", 7="Hot water", 8="Central heat"]	
+			}
+			Frame label="Regelung" {
+				Text item=Nilan_AirTemp_EffPct icon="line" label="Effektivität (Wärmetauscher)"
+				Text item=Nilan_AirTemp_IsSummer icon="sun"
+				Default item=Nilan_AirTemp_Tempinlet
+				Default item=Nilan_AirTemp_TempCont
+				//Default item=Nilan_AirTemp_TempRoom
+								
+				Text item=Nilan_Input_T3_Exhaust label="Raumauslass (Anlage)"
+				Text item=Nilan_Input_T4_Outlet label="Auslass (Abluft)"
+				Text item=Nilan_Input_T7_Inlet label="Raumauslass (Nach Heizelement)"
+				Text item=Nilan_Input_T8_Outdoor label="Außentemperatur"
+				Text item=Nilan_Input_T15_Room label="Wohnzimmer"
+				Text item=Nilan_Input_T0_Controller
+
+				//Default item=Nilan_AirTemp_CapSet
+                //Default item=Nilan_AirTemp_CapAct
+
+				Selection item=Nilan_AirFlow_AirExchMode mappings=[0="Energy", 1="Comfort", 2="ComfortWater"]	
+				Text	item=Nilan_AirFlow_CoolVent	
+				Text	item=Nilan_AirTemp_CoolSet	
+				Text	item=Nilan_AirTemp_TempMinSum	
+				Text	item=Nilan_AirTemp_TempMinWin	
+				Text	item=Nilan_AirTemp_TempMax	
+				Text	item=Nilan_AirTemp_TempMaxWin	
+				Text	item=Nilan_AirTemp_TempSummer	
+
+				Text	item=Nilan_AirQual_RH_VentLo	
+				Text	item=Nilan_AirQual_RH_VentHi	
+				Text	item=Nilan_AirQual_RH_LimLo	
+				Text	item=Nilan_AirQual_RH_TimeOut	
+				//Text	item=Nilan_AirQual_CO2_VentHi	
+				//Text	item=Nilan_AirQual_CO2_LimLo	
+				//Text	item=Nilan_AirQual_0O2_LimHi	
+			}
+			Frame label="Bypass Status" {
+				Text	item=Nilan_Output_AirFlap	
+				Text	item=Nilan_Output_SmokeFlap	
+				Text	item=Nilan_Output_BypassOpen	
+				Text	item=Nilan_Output_BypassClose	
+				
+				Text	item=Nilan_Output_Defrosting		
+				Text	item=Nilan_Output_ExhaustSpeed		
+				Text	item=Nilan_Output_InletSpeed		
+                        } 
+			Frame label="Benutzerwahlprogramm" {	
+				Selection item=Nilan_Program_Select mappings=[0="None", 1="Program 1", 2="Program 2", 3="Program 3", 4="Erase"]
+				Text	item=Nilan_Program_UserFuncAct	
+				Selection item=Nilan_Program_UserFuncSet mappings=[0="None", 1="Extend", 2="Inlet", 3="Exhaust", 4="External heater offset", 5="Ventilate"]
+				Text	item=Nilan_Program_UserTimeSet	
+				Selection item=Nilan_Program_UserVentSet mappings=[0="Off", 1="1", 2="2", 3="3", 4="4"]	
+				Text	item=Nilan_Program_UserTempSet	
+				Text	item=Nilan_Program_UserOffsSet	
+				Text	item=Nilan_Program_User2FuncAct	
+				Selection item=Nilan_Program_User2FuncSet mappings=[0="None", 1="Extend", 2="Inlet", 3="Exhaust", 4="External heater offset", 5="Ventilate"]	
+				Text	item=Nilan_Program_User2TimeSet	
+				Selection item=Nilan_Program_User2VentSet mappings=[0="Off", 1="1", 2="2", 3="3", 4="4"]
+				Text	item=Nilan_Program_User2TempSet	
+				Text	item=Nilan_Program_User2OffsSet	
+			}
+
+			Frame label="Details" {
+				Group item=gNilanInput
+			}
+		}
+	}
+}
