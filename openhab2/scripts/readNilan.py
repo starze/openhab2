@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: ISO-8859-1 -*-
 # https://github.com/starze/openhab2 
 # https://github.com/roggmaeh/nilan-openhab
 
@@ -38,7 +39,7 @@ with open('nilan_modbus.csv') as csvfile:
 		else:
 			strRet = instrument.read_register(int(row['Address']), numberOfDecimals=0, functioncode=fc)
 		
-		if row['Unit'] == "%" or row['Unit'] == "°C":		
+		if row['Unit'] == "%" or row['Unit'] == "°C":
 			print("%s: %s %s" % (row['Name'], strRet, row['Unit']))
 			h.request("http://localhost:8080/rest/items/" + row['Name'] + "/state", "PUT", body=str(strRet))
 		else:
