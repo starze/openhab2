@@ -1,2 +1,1 @@
-String nilan_generated_displaytext "Display: [%s]" <player> (gNilan)
-String nilan_generated_time "[%s]" <clock> (gNilan)
+String nilan_generated_time "Systemzeit [%s]" <clock> (gNilan)

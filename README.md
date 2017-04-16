@@ -18,18 +18,16 @@ Copy config files from openhab2 folder into your openHAB2 installation (i.e. /et
 
 ## Details
 
-### Create nilan heatpump modbus items out of csv file 
+Some details how I created my config-files.
+
+* Create nilan heatpump modbus items out of csv file / nilan documentation
 ```sh
 $ cd /etc/openHAB2/scripts
 $ python createNilanItems.py > ../items/nilan.items
 ```
+* Add modbus address binding according to nilan address-specifications and the configuration in services/modbus.cfg
+* Add Items into your main.sitemap file.
 
-### Automatically update items that are not bind with openHAB2 Modbus binding 
-Currently I didn't get all items bind with openHAB2 so I used a workaround to get all the nilan sensors into openHAB2 items.
-
-```sh
-$ echo "* * * * * root cd /etc/openHAB2/scripts/ && python readNilan.py" >> /etc/contab
-```
 
 ## Other useful links
 * https://github.com/nickma82/nilan_communication_bringup

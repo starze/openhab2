@@ -1,22 +1,16 @@
+import org.openhab.core.library.types.*
 
-rule "nilan displaytext items concatenation"
-when 
-	Item Nilan_Display_Text_1_2 received update or
-        Item Nilan_Display_Text_3_4 received update or
-        Item Nilan_Display_Text_5_6 received update or
-        Item Nilan_Display_Text_7_8 received update or
-        Item Nilan_Display_Text_9_10 received update or
-        Item Nilan_Display_Text_11_12 received update or
-        Item Nilan_Display_Text_13_14 received update or
-        Item Nilan_Display_Text_15_16 received update or
 
-	System started
-then
-	var String formattedString = String::format("%s%s%s%s%s%s%s%s",Nilan_Display_Text_1_2.state, Nilan_Display_Text_3_4.state, Nilan_Display_Text_5_6.state, Nilan_Display_Text_7_8.state, Nilan_Display_Text_9_10.state, Nilan_Display_Text_11_12.state, Nilan_Display_Text_13_14.state, Nilan_Display_Text_15_16.state)
-	logInfo(">>> Display items <<<", formattedString)
-	nilan_generated_displaytext.postUpdate(formattedString)
-end
-
+// some Nilan Items need to be scaled
+val Functions$Function3 scale = [ NumberItem internalItem, NumberItem item, DecimalType factor |
+        var Number decimalValue = (internalItem.state as DecimalType) 
+        // shape negative values
+        if(decimalValue > 0x8000) {
+                decimalValue = decimalValue - 0xFFFF
+        }
+        val scaledValue = decimalValue * factor
+        item.postUpdate(scaledValue)
+]
 
 
 rule "nilan date items concatenation"
@@ -30,7 +24,388 @@ when
 
         System started
 then
-        var String formattedString = String::format("%s:%s %s.%s.%s",Nilan_Time_Hour.state, Nilan_Time_Minute.state, Nilan_Time_Day.state, Nilan_Time_Month.state, Nilan_Time_Year.state)
-        logInfo(">>> Datum Zusammenfassung <<<", formattedString)
+        var String formattedString = String::format("%02.0f:%02.0f Uhr - %02.0f.%02.0f.%04.0f",Float.parseFloat(Nilan_Time_Hour.state.toString()), Float.parseFloat(Nilan_Time_Minute.state.toString()), Float.parseFloat(Nilan_Time_Day.state.toString()), Float.parseFloat(Nilan_Time_Month.state.toString()), Float.parseFloat(Nilan_Time_Year.state.toString()))
         nilan_generated_time.postUpdate(formattedString)
 end
+
+
+
+rule "scale Nilan_Input_T0_Controller_Internal"
+when
+        Item Nilan_Input_T0_Controller_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_T0_Controller_Internal, Nilan_Input_T0_Controller, 0.01)
+end
+
+rule "scale Nilan_Input_T1_Intake_Internal"
+when
+        Item Nilan_Input_T1_Intake_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_T1_Intake_Internal, Nilan_Input_T1_Intake, 0.01)
+end
+
+rule "scale Nilan_Input_T2_Inlet_Internal"
+when
+        Item Nilan_Input_T2_Inlet_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_T2_Inlet_Internal, Nilan_Input_T2_Inlet, 0.01)
+end
+
+rule "scale Nilan_Input_T3_Exhaust_Internal"
+when
+        Item Nilan_Input_T3_Exhaust_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_T3_Exhaust_Internal, Nilan_Input_T3_Exhaust, 0.01)
+end
+
+rule "scale Nilan_Input_T4_Outlet_Internal"
+when
+        Item Nilan_Input_T4_Outlet_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_T4_Outlet_Internal, Nilan_Input_T4_Outlet, 0.01)
+end
+
+rule "scale Nilan_Input_T5_Cond_Internal"
+when
+        Item Nilan_Input_T5_Cond_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_T5_Cond_Internal, Nilan_Input_T5_Cond, 0.01)
+end
+
+rule "scale Nilan_Input_T6_Evap_Internal"
+when
+        Item Nilan_Input_T6_Evap_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_T6_Evap_Internal, Nilan_Input_T6_Evap, 0.01)
+end	
+
+rule "scale Nilan_Input_T7_Inlet_Internal"
+when
+        Item Nilan_Input_T7_Inlet_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_T7_Inlet_Internal, Nilan_Input_T7_Inlet, 0.01)
+end
+
+rule "scale Nilan_Input_T8_Outdoor_Internal"
+when
+        Item Nilan_Input_T8_Outdoor_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_T8_Outdoor_Internal, Nilan_Input_T8_Outdoor, 0.01)
+end
+
+rule "scale Nilan_Input_T9_Heater_Internal"
+when
+        Item Nilan_Input_T9_Heater_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_T9_Heater_Internal, Nilan_Input_T9_Heater, 0.01)
+end		
+
+rule "scale Nilan_Input_T10_Extem_Internal"
+when
+        Item Nilan_Input_T10_Extem_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_T10_Extem_Internal, Nilan_Input_T10_Extem, 0.01)
+end	
+
+rule "scale Nilan_Input_T11_Top_Internal"
+when
+        Item Nilan_Input_T11_Top_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_T11_Top_Internal, Nilan_Input_T11_Top, 0.01)
+end	
+		
+rule "scale Nilan_Input_T12_Bottom_Internal"
+when
+        Item Nilan_Input_T12_Bottom_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_T12_Bottom_Internal, Nilan_Input_T12_Bottom, 0.01)
+end
+
+rule "scale Nilan_Input_T13_Retum_Internal"
+when
+        Item Nilan_Input_T13_Retum_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_T13_Retum_Internal, Nilan_Input_T13_Retum, 0.01)
+end
+
+rule "scale Nilan_Input_T14_Supply_Internal"
+when
+        Item Nilan_Input_T14_Supply_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_T14_Supply_Internal, Nilan_Input_T14_Supply, 0.01)
+end
+
+rule "scale Nilan_Input_T15_Room_Internal"
+when
+        Item Nilan_Input_T15_Room_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_T15_Room_Internal, Nilan_Input_T15_Room, 0.01)
+end		
+
+rule "scale Nilan_Input_T16_Internal"
+when
+        Item Nilan_Input_T16_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_T16_Internal, Nilan_Input_T16, 0.01)
+end
+
+rule "scale Nilan_Input_RH_Internal"
+when
+        Item Nilan_Input_RH_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_RH_Internal, Nilan_Input_RH, 0.01)
+end
+
+rule "scale Nilan_Input_CO2_Internal"
+when
+        Item Nilan_Input_CO2_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Input_CO2_Internal, Nilan_Input_CO2, 0.01)
+end
+
+rule "scale Nilan_AirTemp_TempinletSet_Internal"
+when
+        Item Nilan_AirTemp_TempinletSet_Internal received update or
+        System started
+then
+        scale.apply(Nilan_AirTemp_TempinletSet_Internal, Nilan_AirTemp_TempinletSet, 0.01)
+end
+
+rule "scale Nilan_AirTemp_TempControl_Internal"
+when
+        Item Nilan_AirTemp_TempControl_Internal received update or
+        System started
+then
+        scale.apply(Nilan_AirTemp_TempControl_Internal, Nilan_AirTemp_TempControl, 0.01)
+end
+
+rule "scale Nilan_AirTemp_TempRoom_Internal"
+when
+        Item Nilan_AirTemp_TempRoom_Internal received update or
+        System started
+then
+        scale.apply(Nilan_AirTemp_TempRoom_Internal, Nilan_AirTemp_TempRoom, 0.01)
+end
+
+rule "scale Nilan_AirTemp_EffPct_Internal"
+when
+        Item Nilan_AirTemp_EffPct_Internal received update or
+        System started
+then
+        scale.apply(Nilan_AirTemp_EffPct_Internal, Nilan_AirTemp_EffPct, 0.01)
+end
+
+
+
+
+
+
+
+rule "scale Nilan_Output_ExhaustSpeed_Internal"
+when
+        Item Nilan_Output_ExhaustSpeed_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Output_ExhaustSpeed_Internal, Nilan_Output_ExhaustSpeed, 0.01)
+end
+rule "scale Nilan_Output_ExhaustSpeed"
+when
+        Item Nilan_Output_ExhaustSpeed received command
+then
+        var Number realValue = (Nilan_Output_ExhaustSpeed.state as DecimalType)
+        sendCommand(Nilan_Output_ExhaustSpeed_Internal, realValue*100);
+end
+
+
+rule "scale Nilan_Output_InletSpeed_Internal"
+when
+        Item Nilan_Output_InletSpeed_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Output_InletSpeed_Internal, Nilan_Output_InletSpeed, 0.01)
+end
+rule "scale Nilan_Output_InletSpeed"
+when
+        Item Nilan_Output_InletSpeed received command
+then
+        var Number realValue = (Nilan_Output_InletSpeed.state as DecimalType)
+        sendCommand(Nilan_Output_InletSpeed_Internal, realValue*100);
+end
+
+
+rule "scale Nilan_Control_TempSet_Internal"
+when
+        Item Nilan_Control_TempSet_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Control_TempSet_Internal, Nilan_Control_TempSet, 0.01)
+end
+rule "scale Nilan_Control_TempSet"
+when
+        Item Nilan_Control_TempSet received command
+then
+        var Number realValue = (Nilan_Control_TempSet.state as DecimalType)
+        sendCommand(Nilan_Control_TempSet_Internal, realValue*100);
+end
+
+
+rule "scale Nilan_Control_ServicePct_Internal"
+when
+        Item Nilan_Control_ServicePct_Internal received update or
+        System started
+then
+        scale.apply(Nilan_Control_ServicePct_Internal, Nilan_Control_ServicePct, 0.01)
+end
+rule "scale Nilan_Control_ServicePct"
+when
+        Item Nilan_Control_ServicePct received command
+then
+        var Number realValue = (Nilan_Control_ServicePct.state as DecimalType)
+        sendCommand(Nilan_Control_ServicePct_Internal, realValue*100);
+end
+
+
+rule "scale Nilan_AirTemp_TempMinSum_Internal"
+when
+        Item Nilan_AirTemp_TempMinSum_Internal received update or
+        System started
+then
+        scale.apply(Nilan_AirTemp_TempMinSum_Internal, Nilan_AirTemp_TempMinSum, 0.01)
+end
+rule "scale Nilan_AirTemp_TempMinSum"
+when
+        Item Nilan_AirTemp_TempMinSum received command
+then
+        var Number realValue = (Nilan_AirTemp_TempMinSum.state as DecimalType)
+        sendCommand(Nilan_AirTemp_TempMinSum_Internal, realValue*100);
+end
+
+
+rule "scale Nilan_AirTemp_TempMinWin_Internal"
+when
+        Item Nilan_AirTemp_TempMinWin_Internal received update or
+        System started
+then
+        scale.apply(Nilan_AirTemp_TempMinWin_Internal, Nilan_AirTemp_TempMinWin, 0.01)
+end
+rule "scale Nilan_AirTemp_TempMinWin"
+when
+        Item Nilan_AirTemp_TempMinWin received command
+then
+        var Number realValue = (Nilan_AirTemp_TempMinWin.state as DecimalType)
+        sendCommand(Nilan_AirTemp_TempMinWin_Internal, realValue*100);
+end
+
+
+rule "scale Nilan_AirTemp_TempMax_Internal"
+when
+        Item Nilan_AirTemp_TempMax_Internal received update or
+        System started
+then
+        scale.apply(Nilan_AirTemp_TempMax_Internal, Nilan_AirTemp_TempMax, 0.01)
+end
+rule "scale Nilan_AirTemp_TempMax"
+when
+        Item Nilan_AirTemp_TempMax received command
+then
+        var Number realValue = (Nilan_AirTemp_TempMax.state as DecimalType)
+        sendCommand(Nilan_AirTemp_TempMax_Internal, realValue*100);
+end
+
+
+rule "scale Nilan_AirTemp_TempMaxWin_Internal"
+when
+        Item Nilan_AirTemp_TempMaxWin_Internal received update or
+        System started
+then
+        scale.apply(Nilan_AirTemp_TempMaxWin_Internal, Nilan_AirTemp_TempMaxWin, 0.01)
+end
+rule "scale Nilan_AirTemp_TempMaxWin"
+when
+        Item Nilan_AirTemp_TempMaxWin received command
+then
+        var Number realValue = (Nilan_AirTemp_TempMaxWin.state as DecimalType)
+        sendCommand(Nilan_AirTemp_TempMaxWin_Internal, realValue*100);
+end
+
+
+rule "scale Nilan_AirTemp_TempSummer_Internal"
+when
+        Item Nilan_AirTemp_TempSummer_Internal received update or
+        System started
+then
+        scale.apply(Nilan_AirTemp_TempSummer_Internal, Nilan_AirTemp_TempSummer, 0.01)
+end
+rule "scale Nilan_AirTemp_TempSummer"
+when
+        Item Nilan_AirTemp_TempSummer received command
+then
+        var Number realValue = (Nilan_AirTemp_TempSummer.state as DecimalType)
+        sendCommand(Nilan_AirTemp_TempSummer_Internal, realValue*100);
+end
+
+
+rule "scale Nilan_HotWater_TempSet_T11_Internal"
+when
+        Item Nilan_HotWater_TempSet_T11_Internal received update or
+        System started
+then
+        scale.apply(Nilan_HotWater_TempSet_T11_Internal, Nilan_HotWater_TempSet_T11, 0.01)
+end
+rule "scale Nilan_HotWater_TempSet_T11"
+when
+        Item Nilan_HotWater_TempSet_T11 received command
+then
+        var Number realValue = (Nilan_HotWater_TempSet_T11.state as DecimalType)
+        sendCommand(Nilan_HotWater_TempSet_T11_Internal, realValue*100);
+end
+
+rule "scale Nilan_HotWater_TempSet_T12_Internal"
+when
+        Item Nilan_HotWater_TempSet_T12_Internal received update or
+        System started
+then
+        scale.apply(Nilan_HotWater_TempSet_T12_Internal, Nilan_HotWater_TempSet_T12, 0.01)
+end
+rule "scale Nilan_HotWater_TempSet_T12"
+when
+        Item Nilan_HotWater_TempSet_T12 received command
+then
+        var Number realValue = (Nilan_HotWater_TempSet_T12.state as DecimalType)
+        sendCommand(Nilan_HotWater_TempSet_T12_Internal, realValue*100);
+end
+
+rule "scale Nilan_AirQual_RH_LimLo_Internal"
+when
+        Item Nilan_AirQual_RH_LimLo_Internal received update or
+        System started
+then
+        scale.apply(Nilan_AirQual_RH_LimLo_Internal, Nilan_AirQual_RH_LimLo, 0.01)
+end
+rule "scale Nilan_AirQual_RH_LimLo"
+when
+        Item Nilan_AirQual_RH_LimLo received command
+then
+        var Number realValue = (Nilan_AirQual_RH_LimLo.state as DecimalType)
+        sendCommand(Nilan_AirQual_RH_LimLo_Internal, realValue*100);
+end
+
