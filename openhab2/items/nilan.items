@@ -8,7 +8,7 @@ String	Nilan_App_VersionRelease	"Software version - release (2 character ascii t
 
 Number	Nilan_Input_UserFunc		"User function [%d]" (gNilan) {modbus="nilan_input_discreteio:0"}
 Number	Nilan_Input_AirFilter		"Air filter alarm [%d]" <siren> (gNilan) {modbus="nilan_input_discreteio:1"} //@Note: maybe this is mixed up with 'Fire/Smoke alarm' 
-Number	Nilan_Input_DoorOpen		"Door contact [MAP(zero_one__to__closed_open.map):%s]" <door> (gNilan) {modbus="nilan_input_discreteio:2"} //@TODO replace with OH2 type 'Contact'
+Number	Nilan_Input_DoorOpen		"Door contact [MAP(zero_one__to__closed_open.map):%s]" <flap> (gNilan) {modbus="nilan_input_discreteio:2"} //@TODO replace with OH2 type 'Contact'
 Number	Nilan_Input_Smoke			"Fire/Smoke alarm [%d]" <smoke> (gNilan) {modbus="nilan_input_discreteio:3"}
 Number	Nilan_Input_MotorThermo		"Motor thermo fuse  [%d]" <energy> (gNilan) {modbus="nilan_input_discreteio:4"}
 Number	Nilan_Input_Frost_Overht	"Heating surface frost / overheat [%d]" <climate> (gNilan) {modbus="nilan_input_discreteio:5"}
