@@ -1,0 +1,179 @@
+sitemap nilan_test label="Nilan TestMenu"
+{
+	Frame label="Basic Control" {
+		Text icon="fan" label="Nilan Heatpump" {
+ 			Frame {
+				Default   item=Nilan_Control_RunSet icon="switch"
+				Selection item=Nilan_Control_ModeSet mappings=[0="Off", 1="Heat", 2="Cool", 3="AUTO", 4="Service"]
+				Default   item=Nilan_Control_State  //mappings=[0="Off", 1="Shift", 2="Stop", 3="Start", 4="Standby", 5="Ventilation stop", 6="Ventilation", 7="Heating", 8="Cooling", 9="Hot water", 10="Legionella", 11="Cooling + hot water", 12="Central heating", 13="Defrost", 14="Frost secure", 15="Service", 16="Alarm", 17="Heating + hot water"]
+				Setpoint item=Nilan_Control_TempSet minValue=0 maxValue=65 step=1 
+				Switch item=Nilan_Control_VentSet mappings=[0="Off", 1="1", 2="2", 3="3", 4="4"]
+				Default item=Nilan_Output_UserFunc
+				
+				Default item=Nilan_Alarm_List_1_Importance
+				Default item=Nilan_Output_Compressor
+			}
+
+			Frame label="Sensors" {
+				Default item=Nilan_Input_T15_Room 
+				Default item=Nilan_Input_T3_Exhaust
+				Default item=Nilan_Input_T7_Inlet valuecolor=[<=16="blue",>28="red"]
+				Default item=Nilan_Input_RH
+				Default item=Nilan_Input_T8_Outdoor
+				Default item=Nilan_Input_T10_Extem
+				Default item=Nilan_Output_ExhaustSpeed
+				Default item=Nilan_Output_InletSpeed
+			}
+			
+			Frame label="Hot water" {
+				Default item=Nilan_Output_WaterHeat
+				Default item=Nilan_Output_Compressor
+				Selection item=Nilan_HotWater_TempSet_T11 mappings=[10.0="10 °C", 25.0="25 °C", 40.0="40 °C", 63.0="Legionella (63 °C)"]
+				Text item=Nilan_Input_T11_Top valuecolor=[>45="green",<=40="blue",<20="red"]
+				Selection item=Nilan_HotWater_TempSet_T12 mappings=[10.0="10 °C", 20.0="20 °C", 30.0="30 °C", 35.0="35 °C", 40.0="40 °C", 48.0="48 °C", 53.0="53 °C"]
+				Text item=Nilan_Input_T12_Bottom valuecolor=[>45="green",<=40="blue",<20="red"]
+			}
+
+			Frame label="Status" {
+
+				Text item=Nilan_Display_LED_1 label="Alarme" icon="light" {	
+					Frame {
+						Selection item=Nilan_Display_LED_1 mappings=[0="Off", 1="On"]
+						//Selection item=Nilan_Display_LED_2
+						Selection item=Nilan_Alarm_Reset 
+							mappings=[
+								0="No command",
+								//1..99="1..99 : (reserved internal commands)",
+								//101..199="101..199 : Clear alarm display code 1..99",
+								101="Clear alarm display code 1",
+								102="Clear alarm display code 2",
+								103="Clear alarm display code 3",
+								104="Clear alarm display code 4",
+								//...
+							    255="Clear all alarms"
+							]
+						Selection item=Nilan_Input_AirFilter mappings=[0="OK", 1="Alarm"]
+						Default 		item=Nilan_Input_DoorOpen //mappings=[0="Closed", 1="Open"] 
+						Selection item=Nilan_Input_Smoke mappings=[0="OK", 1="Alarm"] 
+						Selection item=Nilan_Input_MotorThermo mappings=[0="OK", 1="Burned"] 
+						Selection item=Nilan_Input_Frost_Overht mappings=[0="OK", 1="Alarm"] 
+						Selection item=Nilan_Input_AirFlow mappings=[0="OK", 1="Alarm"]      
+						Selection item=Nilan_Input_P_HI mappings=[0="OK", 1="Alarm"] 
+						Selection item=Nilan_Input_Defrost mappings=[0="OK", 1="Alarm"] 
+					
+						Selection item=Nilan_Control_ServiceMode mappings=[0="Off", 1="Defrost", 2="Flaps", 3="Inlet", 4="Exhaust", 5="Compressor", 6="Heating", 7="Hot water", 8="Central heat"]	
+					}
+					Frame label="Alarms" {
+						Text item=Nilan_Alarm_Status label="Alarm-Code (Bitmask)"
+						//Bitmaks: 0x80 : Active / 0x03 : Nb. of alarms
+	
+						Text item=Nilan_Alarm_List_1_ID
+						Text item=Nilan_Alarm_List_1_Importance visibility=[Nilan_Alarm_List_1_ID>=1]
+						Text item=Nilan_Alarm_List_1_Date visibility=[Nilan_Alarm_List_1_ID>=1] 
+						Text item=Nilan_Alarm_List_1_Time visibility=[Nilan_Alarm_List_1_ID>=1]
+						Text item=Nilan_Alarm_List_2_ID visibility=[Nilan_Alarm_List_2_ID>=1]
+						Text item=Nilan_Alarm_List_2_Date visibility=[Nilan_Alarm_List_2_ID>=1]
+						Text item=Nilan_Alarm_List_2_Time visibility=[Nilan_Alarm_List_2_ID>=1]
+						Text item=Nilan_Alarm_List_3_ID visibility=[Nilan_Alarm_List_3_ID>=1]
+						Text item=Nilan_Alarm_List_3_Date visibility=[Nilan_Alarm_List_3_ID>=1]
+						Text item=Nilan_Alarm_List_3_Time visibility=[Nilan_Alarm_List_3_ID>=1]
+					}
+				}
+
+				Text item=Nilan_Output_BypassOpen label="Bypass Status" icon="flap" {
+					Switch item=Nilan_Output_AirFlap mappings=[0=Closed, 1=Open]
+					Switch item=Nilan_Output_SmokeFlap mappings=[0=Closed, 1=Open]
+					Switch item=Nilan_Output_BypassOpen mappings=[0=Closed, 1=Open]
+					Switch item=Nilan_Output_BypassClose mappings=[0=Closed, 1=Open]
+					Switch item=Nilan_Output_Defrosting mappings=[0=Off, 1=On]
+				}
+			}
+
+			Frame label="Regler" {
+
+				Text item=Nilan_AirTemp_EffPct {
+					Selection item=Nilan_Control_State  mappings=[0="Off", 1="Shift", 2="Stop", 3="Start", 4="Standby", 5="Ventilation stop", 6="Ventilation", 7="Heating", 8="Cooling", 9="Hot water", 10="Legionella", 11="Cooling + hot water", 12="Central heating", 13="Defrost", 14="Frost secure", 15="Service", 16="Alarm", 17="Heating + hot water"]
+					//Text item=Nilan_Control_SeclnState  label="Actual time in state [%d]"
+					Text item=Nilan_AirTemp_EffPct
+					Selection item=Nilan_AirTemp_IsSummer mappings=[0="Winter", 1="Sommer"]
+					Setpoint item=Nilan_AirTemp_TempSummer minValue=0 maxValue=65 step=1
+					Text item=Nilan_Input_T8_Outdoor
+					//Text item=Nilan_Input_T1_Intake
+					Text item=Nilan_Input_T3_Exhaust
+					Text item=Nilan_Input_T4_Outlet
+					Text item=Nilan_AirTemp_TempinletSet
+					Text item=Nilan_AirTemp_TempControl
+					Text item=Nilan_Input_T2_Inlet
+					Text item=Nilan_Input_T7_Inlet
+					Text item=Nilan_Input_T15_Room
+					//Text item=Nilan_AirTemp_TempRoom //same as T15
+
+					Text item=Nilan_Input_T0_Controller
+
+					//Default item=Nilan_AirTemp_CapSet
+					//Default item=Nilan_AirTemp_CapAct
+
+					Setpoint item=Nilan_AirTemp_TempMinSum minValue=0 maxValue=65 step=1
+					Setpoint item=Nilan_AirTemp_TempMax minValue=0 maxValue=65 step=1
+					Setpoint item=Nilan_AirTemp_TempMinWin minValue=0 maxValue=65 step=1	
+					Setpoint item=Nilan_AirTemp_TempMaxWin minValue=0 maxValue=65 step=1
+
+					Selection item=Nilan_AirFlow_AirExchMode mappings=[0="Energy", 1="Comfort", 2="ComfortWater"]
+					Selection item=Nilan_AirFlow_CoolVent mappings=[0="Off", 1="1", 2="2", 3="3", 4="4"]
+					Selection item=Nilan_AirTemp_CoolSet mappings=[0="Off (No cooling allowed)", 1="Set + 0 °C (User setpoint plus 0 degrees)", 2="Set + 1 °C", 3="Set + 2 °C", 4="Set + 3 °C", 5="Set + 4 °C", 6="Set + 5 °C", 7="Set + 7 °C", 8="Set + 10 °C"]
+				}
+
+				Text item=Nilan_Input_RH icon="humidity" {
+					Text item=Nilan_Input_RH
+					Selection item=Nilan_AirQual_RH_VentLo mappings=[0="Off", 1="1", 2="2", 3="3", 4="4"]
+					Selection item=Nilan_AirQual_RH_VentHi mappings=[0="Off", 1="1", 2="2", 3="3", 4="4"]	
+					Setpoint item=Nilan_AirQual_RH_LimLo minValue=0 maxValue=100 step=1 
+					Setpoint item=Nilan_AirQual_RH_TimeOut  minValue=0 maxValue=65000 step=1 
+				}	
+
+				Text label="CO2-Regler" icon="carbondioxide" visibility=[Nilan_Input_CO2>0] {
+					Text	item=Nilan_AirQual_CO2_VentHi	
+					Text	item=Nilan_AirQual_CO2_LimLo	
+					Text	item=Nilan_AirQual_CO2_LimHi	
+				}
+
+			}
+
+			Frame label="Benutzerwahlprogramm" {	
+				Selection item=Nilan_Program_Select mappings=[0="None", 1="Program 1", 2="Program 2", 3="Program 3", 4="Erase"]
+				
+				Text label="Benutzerfunktion 1" icon="boy_2" {
+					Selection item=Nilan_Program_UserFuncAct mappings=[0="nicht aktiv", 1="aktiv"] icon="fire"
+					Selection item=Nilan_Program_UserFuncSet mappings=[0="None", 1="Extend", 2="Inlet", 3="Exhaust", 4="External heater offset", 5="Ventilate"]
+					Setpoint item=Nilan_Program_UserTimeSet minValue=0 maxValue=65000 step=1 
+					Selection item=Nilan_Program_UserVentSet mappings=[0="Off", 1="1", 2="2", 3="3", 4="4"]	
+					Setpoint item=Nilan_Program_UserTempSet minValue=0 maxValue=65 step=1 visibility=[Nilan_Program_UserFuncSet==1]
+					Setpoint item=Nilan_Program_UserOffsSet minValue=0 maxValue=65000 step=1 visibility=[Nilan_Program_UserFuncSet==4]
+				}
+
+				Text label="Benutzerfunktion 2" icon="boy_2" {
+					Selection item=Nilan_Program_User2FuncAct mappings=[0="nicht aktiv", 1="aktiv"]
+					Selection item=Nilan_Program_User2FuncSet mappings=[0="None", 1="Extend", 2="Inlet", 3="Exhaust", 4="External heater offset", 5="Ventilate"]	
+					Setpoint item=Nilan_Program_User2TimeSet minValue=0 maxValue=65000 step=1 
+					Selection item=Nilan_Program_User2VentSet mappings=[0="Off", 1="1", 2="2", 3="3", 4="4"]
+					Setpoint item=Nilan_Program_User2TempSet minValue=0 maxValue=65 step=1 visibility=[Nilan_Program_User2FuncSet==1]
+					Setpoint item=Nilan_Program_User2OffsSet minValue=0 maxValue=65000 step=1 visibility=[Nilan_Program_User2FuncSet==4] 	
+				}
+			}
+			
+
+			Frame label="Details" {
+				Group item=gNilan label="Alle Modbus-Attribute (Input + Holding)"
+				
+				Text label="Time config" {
+					Setpoint item=Nilan_Time_Second minValue=0 maxValue=59 step=1
+					Setpoint item=Nilan_Time_Minute minValue=0 maxValue=59 step=1
+					Setpoint item=Nilan_Time_Hour minValue=0 maxValue=23 step=1
+					Setpoint item=Nilan_Time_Day minValue=1 maxValue=31 step=1
+					Setpoint item=Nilan_Time_Month minValue=1 maxValue=12 step=1
+					Setpoint item=Nilan_Time_Year minValue=1900 maxValue=2300 step=1
+				}
+			}
+		} //End of 'Nilan Heatpump'
+	}
+}

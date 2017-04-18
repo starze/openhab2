@@ -1,0 +1,25 @@
+//test
+-=Not set yet
+0=None
+1=Hardware controller fault
+2=Warning alarm went critical
+3=Fire
+7=Frost 07
+8=Frost 08
+9=Overtemp
+10=Overheat
+11=Airflow
+15=Room temp low
+16=Control Software Err
+17=Control Software Watchdog
+18=Default settings reset
+19=Inspect filters
+21=Power failure detected
+22=Heatup impossible
+27=Shorted temp sensor
+57=Shorted temp sensor
+28=Disconnected temp sensor
+58=Disconnected temp sensor
+71=Max defrost time exceeded
+91=Accessories circuit board
+92=Electric adjustents write Err
