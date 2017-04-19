@@ -168,10 +168,10 @@ Number	Nilan_HotWater_TempSet_T12	"Bottom temperature setpoint [%.1f °C]" <temp
 
 Number	Nilan_CentralHeat_HeatExtern "External heating offset from room temperature setpoint [%.1f °C]" <temperature> (gNilan) {modbus="<[nilan_holding_centheat:0:transformation=JS(divide100.js)]"}
 
-Number	Nilan_AirQual_RH_VentLo		"Humidity low winter step select [MAP(nilan_ventset.map):%s]" 	<fan_ceiling> 	(gNilan) {modbus="<[nilan_holding_airqualrh:0:transformation=JS(divide100.js)], >[nilan_holding_airqualrh:0:transformation=JS(multiplydv100.js)]"}
-Number	Nilan_AirQual_RH_VentHi		"Humidity high step select [MAP(nilan_ventset.map):%s]" 		<fan_ceiling> 	(gNilan) {modbus="<[nilan_holding_airqualrh:1:transformation=JS(divide100.js)], >[nilan_holding_airqualrh:1:transformation=JS(multiplydv100.js)]"}
+Number	Nilan_AirQual_RH_VentLo		"Humidity low winter step select [MAP(nilan_ventset.map):%s]" 	<fan_ceiling> 	(gNilan) {modbus="nilan_holding_airqualrh:0"}
+Number	Nilan_AirQual_RH_VentHi		"Humidity high step select [MAP(nilan_ventset.map):%s]" 		<fan_ceiling> 	(gNilan) {modbus="nilan_holding_airqualrh:1"}
 Number	Nilan_AirQual_RH_LimLo 		"Humidity limit for low ventilation [%.0f %%]" 					<humidity> 		(gNilan) {modbus="<[nilan_holding_airqualrh:2:transformation=JS(divide100.js)], >[nilan_holding_airqualrh:2:transformation=JS(multiplydv100.js)]"}
-Number	Nilan_AirQual_RH_TimeOut	"Humidity max. time on high ventilation [%d min.]" 				<clock> 		(gNilan) {modbus="<[nilan_holding_airqualrh:3:transformation=JS(divide100.js)], >[nilan_holding_airqualrh:3:transformation=JS(multiplydv100.js)]"}
+Number	Nilan_AirQual_RH_TimeOut	"Humidity max. time on high ventilation [%d min.]" 				<clock> 		(gNilan) {modbus="nilan_holding_airqualrh:3"}
 
 Number	Nilan_AirQual_CO2_VentHi	"CO2 high step select [MAP(nilan_ventset.map):%s]" <fan_ceiling> 	(gNilan) {modbus="nilan_holding_airqualco2:0"}
 Number	Nilan_AirQual_CO2_LimLo		"CO2 limit for normal ventilation [%d ppm]" 						(gNilan) {modbus="nilan_holding_airqualco2:1"}
