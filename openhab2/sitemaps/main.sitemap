@@ -40,6 +40,13 @@ sitemap main label="Main Menu"
 			}
 
 			Frame label="Sensoren" {
+				Selection item=nilan_generated_chartperiod label="Verlaufzeitraum" mappings=[0="Stunde", 1="Tag", 2="Woche", 3="Monat", 4="Jahr"]
+				Chart item=gAirSensor period=h refresh=3000 visibility=[nilan_generated_chartperiod==0, nilan_generated_chartperiod=="Uninitialized"]
+				Chart item=gAirSensor period=D refresh=3000 visibility=[nilan_generated_chartperiod==1]
+				Chart item=gAirSensor period=W refresh=3000 visibility=[nilan_generated_chartperiod==2]
+				Chart item=gAirSensor period=M refresh=3000 visibility=[nilan_generated_chartperiod==3]
+				Chart item=gAirSensor period=Y refresh=3000 visibility=[nilan_generated_chartperiod==4]
+				
 				Text item=Nilan_Input_T15_Room label="Wohnzimmer"
 				Text item=Nilan_Input_T3_Exhaust label="Raumabluft"
 				Text item=Nilan_Input_T7_Inlet label="Raumeinlass"
@@ -133,6 +140,13 @@ sitemap main label="Main Menu"
 				}
 
 				Text item=Nilan_Input_RH label="Luftfeuchtigkeitsregler" icon="humidity" {
+					Selection item=nilan_generated_chartperiod label="Verlaufzeitraum" mappings=[0="Stunde", 1="Tag", 2="Woche", 3="Monat", 4="Jahr"]
+					Chart item=Nilan_Input_RH period=h refresh=3000 visibility=[nilan_generated_chartperiod==0, nilan_generated_chartperiod=="Uninitialized"]
+					Chart item=Nilan_Input_RH period=D refresh=3000 visibility=[nilan_generated_chartperiod==1]
+					Chart item=Nilan_Input_RH period=W refresh=3000 visibility=[nilan_generated_chartperiod==2]
+					Chart item=Nilan_Input_RH period=M refresh=3000 visibility=[nilan_generated_chartperiod==3]
+					Chart item=Nilan_Input_RH period=Y refresh=3000 visibility=[nilan_generated_chartperiod==4]
+					
 					Text item=Nilan_Input_RH label="Luftfeuchtigkeit"
 					Selection item=Nilan_AirQual_RH_VentLo label="Lüfterstufe bei zu niedriger Luftfeuchtigkeit (Winter)" mappings=[0="Off", 1="1", 2="2", 3="3", 4="4"]
 					Selection item=Nilan_AirQual_RH_VentHi label="Lüfterstufe bei zu hoher Luftfeuchtigkeit" mappings=[0="Off", 1="1", 2="2", 3="3", 4="4"]	
@@ -170,7 +184,6 @@ sitemap main label="Main Menu"
 				}
 			}
 			
-
 			Frame label="Details" {
 				Group item=gNilan label="Alle Modbus-Attribute (Input + Holding)"
 			}

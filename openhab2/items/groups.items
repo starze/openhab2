@@ -1,3 +1,5 @@
 Group All
-Group gNilan "All Modbus attributes (input + holding)" (All)
-Group gNilanProgram "User program settings"
+Group gNilan            "All Modbus attributes (input + holding)" (All)
+Group gNilanProgram     "User program settings"                   (All)
+Group gAirSensor        "Air temperature and quality sensors"     (All)
+Group gWaterTemperature "Hot water sensors"                       (All)

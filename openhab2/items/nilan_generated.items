@@ -1,1 +1,2 @@
-String nilan_generated_time "Systemzeit [%s]" <clock> (gNilan)
+String nilan_generated_time         "Systemzeit [%s]"    <clock> (gNilan)
+Number nilan_generated_chartperiod  "Chart period [%d]"  <line>  (gNilan)
