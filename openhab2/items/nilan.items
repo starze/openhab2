@@ -156,21 +156,21 @@ Number Nilan_Control_Preset           "Request preset to factory [%d]"          
 Number Nilan_AirFlow_AirExchMode      "Air exchange mode [MAP(nilan_airflow_airexchmode.map):%s]"      <flow>          (gNilan) {modbus="nilan_holding_airflow:0"}
 Number Nilan_AirFlow_CoolVent         "Cooling high ventilation step [MAP(nilan_ventset.map):%s]"      <fan_ceiling>   (gNilan) {modbus="nilan_holding_airflow:1"}
 
-Number Nilan_AirTemp_CoolSet          "Cooling temperature setpoint select [%d]"  <temperature> (gNilan) {modbus="<[nilan_holding_airtemp:0:transformation=JS(divide100.js)], >[nilan_holding_airtemp:0:transformation=JS(multiplydv100.js)]"}
-Number Nilan_AirTemp_TempMinSum       "Inlet temp. min. summer [%.1f °C]"         <temperature> (gNilan) {modbus="<[nilan_holding_airtemp:1:transformation=JS(divide100.js)], >[nilan_holding_airtemp:1:transformation=JS(multiplydv100.js)]"}
-Number Nilan_AirTemp_TempMinWin       "Inlet temp. min. winter [%.1f °C]"         <temperature> (gNilan) {modbus="<[nilan_holding_airtemp:2:transformation=JS(divide100.js)], >[nilan_holding_airtemp:2:transformation=JS(multiplydv100.js)]"}
-Number Nilan_AirTemp_TempMax          "Inlet temp. max. summer [%.1f °C]"         <temperature> (gNilan) {modbus="<[nilan_holding_airtemp:3:transformation=JS(divide100.js)], >[nilan_holding_airtemp:3:transformation=JS(multiplydv100.js)]"}
-Number Nilan_AirTemp_TempMaxWin       "Inlet temp. max. winter [%.1f °C]"         <temperature> (gNilan) {modbus="<[nilan_holding_airtemp:4:transformation=JS(divide100.js)], >[nilan_holding_airtemp:4:transformation=JS(multiplydv100.js)]"}
-Number Nilan_AirTemp_TempSummer       "Summer/winter limit [%.1f °C]"             <temperature> (gNilan) {modbus="<[nilan_holding_airtemp:5:transformation=JS(divide100.js)], >[nilan_holding_airtemp:5:transformation=JS(multiplydv100.js)]"}
+Number Nilan_AirTemp_CoolSet          "Cooling temperature setpoint select [%d]"  <temperature> (gNilan) {modbus="<[nilan_holding_airtemp:0:transformation=JS(divide100.js)], >[nilan_holding_airtemp:0:transformation=JS(multiply100.js)]"}
+Number Nilan_AirTemp_TempMinSum       "Inlet temp. min. summer [%.1f °C]"         <temperature> (gNilan) {modbus="<[nilan_holding_airtemp:1:transformation=JS(divide100.js)], >[nilan_holding_airtemp:1:transformation=JS(multiply100.js)]"}
+Number Nilan_AirTemp_TempMinWin       "Inlet temp. min. winter [%.1f °C]"         <temperature> (gNilan) {modbus="<[nilan_holding_airtemp:2:transformation=JS(divide100.js)], >[nilan_holding_airtemp:2:transformation=JS(multiply100.js)]"}
+Number Nilan_AirTemp_TempMax          "Inlet temp. max. summer [%.1f °C]"         <temperature> (gNilan) {modbus="<[nilan_holding_airtemp:3:transformation=JS(divide100.js)], >[nilan_holding_airtemp:3:transformation=JS(multiply100.js)]"}
+Number Nilan_AirTemp_TempMaxWin       "Inlet temp. max. winter [%.1f °C]"         <temperature> (gNilan) {modbus="<[nilan_holding_airtemp:4:transformation=JS(divide100.js)], >[nilan_holding_airtemp:4:transformation=JS(multiply100.js)]"}
+Number Nilan_AirTemp_TempSummer       "Summer/winter limit [%.1f °C]"             <temperature> (gNilan) {modbus="<[nilan_holding_airtemp:5:transformation=JS(divide100.js)], >[nilan_holding_airtemp:5:transformation=JS(multiply100.js)]"}
 
-Number Nilan_HotWater_TempSet_T11     "Top temperature setpoint [%.1f °C]"        <temperature> (gNilan) {modbus="<[nilan_holding_hotwater:0:transformation=JS(divide100.js)], >[nilan_holding_hotwater:0:transformation=JS(multiplydv100.js)]"}
-Number Nilan_HotWater_TempSet_T12     "Bottom temperature setpoint [%.1f °C]"     <temperature> (gNilan) {modbus="<[nilan_holding_hotwater:1:transformation=JS(divide100.js)], >[nilan_holding_hotwater:1:transformation=JS(multiplydv100.js)]"}
+Number Nilan_HotWater_TempSet_T11     "Top temperature setpoint [%.1f °C]"        <temperature> (gNilan) {modbus="<[nilan_holding_hotwater:0:transformation=JS(divide100.js)], >[nilan_holding_hotwater:0:transformation=JS(multiply100.js)]"}
+Number Nilan_HotWater_TempSet_T12     "Bottom temperature setpoint [%.1f °C]"     <temperature> (gNilan) {modbus="<[nilan_holding_hotwater:1:transformation=JS(divide100.js)], >[nilan_holding_hotwater:1:transformation=JS(multiply100.js)]"}
 
 Number Nilan_CentralHeat_HeatExtern   "External heating offset from room temperature setpoint [%.1f °C]" <temperature> (gNilan) {modbus="<[nilan_holding_centheat:0:transformation=JS(divide100.js)]"}
 
 Number Nilan_AirQual_RH_VentLo        "Humidity low winter step select [MAP(nilan_ventset.map):%s]" <fan_ceiling> (gNilan) {modbus="nilan_holding_airqualrh:0"}
 Number Nilan_AirQual_RH_VentHi        "Humidity high step select [MAP(nilan_ventset.map):%s]"       <fan_ceiling> (gNilan) {modbus="nilan_holding_airqualrh:1"}
-Number Nilan_AirQual_RH_LimLo         "Humidity limit for low ventilation [%.0f %%]"                <humidity>    (gNilan) {modbus="<[nilan_holding_airqualrh:2:transformation=JS(divide100.js)], >[nilan_holding_airqualrh:2:transformation=JS(multiplydv100.js)]"}
+Number Nilan_AirQual_RH_LimLo         "Humidity limit for low ventilation [%.0f %%]"                <humidity>    (gNilan) {modbus="<[nilan_holding_airqualrh:2:transformation=JS(divide100.js)], >[nilan_holding_airqualrh:2:transformation=JS(multiply100.js)]"}
 Number Nilan_AirQual_RH_TimeOut       "Humidity max. time on high ventilation [%d min.]"            <clock>       (gNilan) {modbus="nilan_holding_airqualrh:3"}
 
 Number Nilan_AirQual_CO2_VentHi       "CO2 high step select [MAP(nilan_ventset.map):%s]"  <fan_ceiling>  (gNilan) {modbus="nilan_holding_airqualco2:0"}
