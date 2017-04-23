@@ -17,8 +17,8 @@ Items {
         
     nilan_generated_chartperiod : strategy = everyChange,restoreOnStartup
         
-    gAirSensor : strategy = everyMinute
+    gAirSensor* : strategy = everyMinute
 
-    gWaterTemperature : strategy = everyMinute
+    gWaterTemperature* : strategy = everyMinute
 
 }
