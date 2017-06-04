@@ -19,8 +19,8 @@ Configuration files for my openHAB2 installation. Including Modbus communication
 
 ## Installed Transformations
 
-* [Map Transformation](https://github.com/openhab/openhab1-addons/wiki/Transformations>)
-* [Javascript Transformation](https://github.com/openhab/openhab1-addons/wiki/Transformations>)
+* [Map Transformation](https://github.com/openhab/openhab1-addons/wiki/Transformations)
+* [Javascript Transformation](https://github.com/openhab/openhab1-addons/wiki/Transformations)
 
 ## Quick Setup
 
