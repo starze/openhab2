@@ -6,20 +6,20 @@ String Nilan_App_VersionMajor         "Software version - major (2 character asc
 String Nilan_App_VersionMinor         "Software version - minor (2 character ascii text) [%s]"    (gNilan) {modbus="nilan_input_device:2"}
 String Nilan_App_VersionRelease       "Software version - release (2 character ascii text) [%s]"  (gNilan) {modbus="nilan_input_device:3"}
 
-Number Nilan_Input_UserFunc           "User function [%d]"                                                        (gNilan) {modbus="nilan_input_discreteio:0"}
-Number Nilan_Input_AirFilter          "Air filter alarm [%d]"                                 <siren>             (gNilan) {modbus="nilan_input_discreteio:1"} //@Note: maybe this is mixed up with 'Fire/Smoke alarm' 
-Number Nilan_Input_DoorOpen           "Door contact [MAP(zero_one__to__closed_open.map):%s]"  <flap>              (gNilan) {modbus="nilan_input_discreteio:2"} //@TODO replace with OH2 type 'Contact'
-Number Nilan_Input_Smoke              "Fire/Smoke alarm [%d]"                                 <smoke>             (gNilan) {modbus="nilan_input_discreteio:3"}
-Number Nilan_Input_MotorThermo        "Motor thermo fuse  [%d]"                               <energy>            (gNilan) {modbus="nilan_input_discreteio:4"}
-Number Nilan_Input_Frost_Overht       "Heating surface frost / overheat [%d]"                 <climate>           (gNilan) {modbus="nilan_input_discreteio:5"}
-Number Nilan_Input_AirFlow            "Airflow monitor (guard) [%d]"                          <flow>              (gNilan) {modbus="nilan_input_discreteio:6"}
-Number Nilan_Input_P_HI               "High pressure switch [%d]"                             <pressure>          (gNilan) {modbus="nilan_input_discreteio:7"}
-Number Nilan_Input_P_LO               "Low pressure switch [%d]"                              <pressure>          (gNilan) {modbus="nilan_input_discreteio:8"}
-Number Nilan_Input_Boil               "Hot water boiling [%d]"                                <temperature_hot>   (gNilan) {modbus="nilan_input_discreteio:9"}
-Number Nilan_Input_3WayPos            "Hot water 3-way valve position [%d]"                                       (gNilan) {modbus="nilan_input_discreteio:10"} //TODO implement transform.map
-Number Nilan_Input_DefrostHG          "Hotgas defrost type selection [%d]"                                        (gNilan) {modbus="nilan_input_discreteio:11"}
-Number Nilan_Input_Defrost            "Defrost thermostat [%d]"                               <climate>           (gNilan) {modbus="nilan_input_discreteio:12"}
-Number Nilan_Input_UserFunc_2         "User function 2 [%d]"                                                      (gNilan) {modbus="nilan_input_discreteio:13"}
+Switch  Nilan_Input_UserFunc           "User function"                         <boy_2>            (gNilan) {modbus="nilan_input_discreteio:0"}
+Switch  Nilan_Input_AirFilter          "Air filter alarm"                      <siren>            (gNilan) {modbus="nilan_input_discreteio:1"}
+Contact Nilan_Input_DoorOpen           "Door contact [%s]"                     <contact>          (gNilan) {modbus="nilan_input_discreteio:2"}
+Switch  Nilan_Input_Smoke              "Fire/Smoke alarm"                      <smoke>            (gNilan) {modbus="nilan_input_discreteio:3"}
+Switch  Nilan_Input_MotorThermo        "Motor thermo fuse "                    <energy>           (gNilan) {modbus="nilan_input_discreteio:4"}
+Switch  Nilan_Input_Frost_Overht       "Heating surface frost / overheat"      <climate>          (gNilan) {modbus="nilan_input_discreteio:5"}
+Switch  Nilan_Input_AirFlow            "Airflow monitor (guard)"               <flow>             (gNilan) {modbus="nilan_input_discreteio:6"}
+Switch  Nilan_Input_P_HI               "High pressure switch"                  <pressure>         (gNilan) {modbus="nilan_input_discreteio:7"}
+Switch  Nilan_Input_P_LO               "Low pressure switch"                   <pressure>         (gNilan) {modbus="nilan_input_discreteio:8"}
+Switch  Nilan_Input_Boil               "Hot water boiling"                     <temperature_hot>  (gNilan) {modbus="nilan_input_discreteio:9"}
+Switch  Nilan_Input_3WayPos            "Hot water 3-way valve position"                           (gNilan) {modbus="nilan_input_discreteio:10"} //TODO implement transform.map
+Switch  Nilan_Input_DefrostHG          "Hotgas defrost type selection"                            (gNilan) {modbus="nilan_input_discreteio:11"}
+Switch  Nilan_Input_Defrost            "Defrost thermostat"                    <climate>          (gNilan) {modbus="nilan_input_discreteio:12"}
+Switch  Nilan_Input_UserFunc_2         "User function 2"                       <boy_2>            (gNilan) {modbus="nilan_input_discreteio:13"}
 
 Number Nilan_Input_T0_Controller      "Controller board temperature [%.1f °C]"         <temperature>   (gNilan)                   {modbus="<[ nilan_input_analogio:0:transformation=JS(divide100.js)]"}
 Number Nilan_Input_T1_Intake          "Fresh air intake temperature [%.1f °C]"         <temperature>   (gNilan)                   {modbus="<[ nilan_input_analogio:1:transformation=JS(divide100.js)]"}
@@ -42,19 +42,18 @@ Number Nilan_Input_RH                 "Humidity [%.1f %%]"                      
 Number Nilan_Input_CO2                "Carbon dioxide [%.1f]"                          <carbondioxide> (gNilan,gAirSensor)        {modbus="<[nilan_input_analogio:22:transformation=JS(divide100.js)]"}
 
 Number Nilan_Alarm_Status             "Alarm state bit mask [%d]"                                        <keyring>   (gNilan) {modbus="nilan_input_alarm:0"}
-Number Nilan_Alarm_List_1_ID          "Alarm 1 - Code [MAP(nilan_alarmcode_to_string.map):%s]"                       (gNilan) {modbus="nilan_input_alarm:1"}
-Number Nilan_Alarm_List_1_Importance  "Alarm 1 - Importance [MAP(nilan_alarmcode_to_importance.map):%s]" <alarm>     (gNilan) {modbus="nilan_input_alarm:1"}
+Number Nilan_Alarm_List_1_ID          "Alarm 1 - Code [MAP(nilan_alarmcode_to_string.map):%d]"           <keyring>   (gNilan) {modbus="nilan_input_alarm:1"}
+Number Nilan_Alarm_List_1_Importance  "Alarm 1 - Importance [MAP(nilan_alarmcode_to_importance.map):%d]" <alarm>     (gNilan) {modbus="nilan_input_alarm:1"}
+String Nilan_Alarm_List_1_Date        "Alarm 1 - Date [%s]"                                              <calendar>  (gNilan) {modbus="<[nilan_input_alarm:2:transformation=JS(nilan_alarmdate.js)]"}
+String Nilan_Alarm_List_1_Time        "Alarm 1 - Time [%s]"                                              <clock>     (gNilan) {modbus="<[nilan_input_alarm:3:transformation=JS(nilan_alarmtime.js)]"}
+Number Nilan_Alarm_List_2_ID          "Alarm 2 - Code [%d]"                                              <keyring>   (gNilan) {modbus="nilan_input_alarm:4"}
+String Nilan_Alarm_List_2_Date        "Alarm 2 - Date [%s]"                                              <calendar>  (gNilan) {modbus="<[nilan_input_alarm:5:transformation=JS(nilan_alarmdate.js)]"}
+String Nilan_Alarm_List_2_Time        "Alarm 2 - Time [%s]"                                              <clock>     (gNilan) {modbus="<[nilan_input_alarm:6:transformation=JS(nilan_alarmtime.js)]"}
+Number Nilan_Alarm_List_3_ID          "Alarm 3 - Code [%d]"                                              <keyring>   (gNilan) {modbus="nilan_input_alarm:7"}
+String Nilan_Alarm_List_3_Date        "Alarm 3 - Date [%s]"                                              <calendar>  (gNilan) {modbus="<[nilan_input_alarm:8:transformation=JS(nilan_alarmdate.js)]"}
+String Nilan_Alarm_List_3_Time        "Alarm 3 - Time [%s]"                                              <clock>     (gNilan) {modbus="<[nilan_input_alarm:9:transformation=JS(nilan_alarmtime.js)]"}
 
-Number Nilan_Alarm_List_1_Date        "Alarm 1 - Date [%d]" (gNilan) {modbus="nilan_input_alarm:2"}
-Number Nilan_Alarm_List_1_Time        "Alarm 1 - Time [%d]" (gNilan) {modbus="nilan_input_alarm:3"}
-Number Nilan_Alarm_List_2_ID          "Alarm 2 - Code [%d]" (gNilan) {modbus="nilan_input_alarm:4"}
-Number Nilan_Alarm_List_2_Date        "Alarm 2 - Date [%d]" (gNilan) {modbus="nilan_input_alarm:5"}
-Number Nilan_Alarm_List_2_Time        "Alarm 2 - Time [%d]" (gNilan) {modbus="nilan_input_alarm:6"}
-Number Nilan_Alarm_List_3_ID          "Alarm 3 - Code [%d]" (gNilan) {modbus="nilan_input_alarm:7"}
-Number Nilan_Alarm_List_3_Date        "Alarm 3 - Date [%d]" (gNilan) {modbus="nilan_input_alarm:8"}
-Number Nilan_Alarm_List_3_Time        "Alarm 3 - Time [%d]" (gNilan) {modbus="nilan_input_alarm:9"}
-
-Number Nilan_Control_RunAct           "Actual on/off state [MAP(nilan_on_off.map):%s]"            <switch>    (gNilan) {modbus="nilan_input_control:0"}
+Switch Nilan_Control_RunAct           "Actual on/off state"                                       <switch>    (gNilan) {modbus="nilan_input_control:0"}
 Number Nilan_Control_ModeAct          "Actual operation mode [MAP(nilan_control_modeact.map):%s]" <settings>  (gNilan) {modbus="nilan_input_control:1"}
 Number Nilan_Control_State            "Actual control state [MAP(nilan_control_state.map):%s]"    <settings>  (gNilan) {modbus="nilan_input_control:2"}
 Number Nilan_Control_SeclnState       "Actual time in state [%d s]"                               <clock>     (gNilan) {modbus="nilan_input_control:3"}
@@ -67,8 +66,8 @@ Number Nilan_AirTemp_EffPct           "Passive heat exchanger efficiency [%.1f %
 Number Nilan_AirTemp_CapSet           "Requested capacity [%.1f %%]"                                      (gNilan) {modbus="<[nilan_input_airtemp:5:transformation=JS(divide100.js)]"}
 Number Nilan_AirTemp_CapAct           "Actual capacity [%.1f %%]"                                         (gNilan) {modbus="<[nilan_input_airtemp:6:transformation=JS(divide100.js)]"}
 
-Number Nilan_Display_LED_1            "User panel indicator light [%d]"   <light> (gNilan) {modbus="nilan_input_userpanel:0"} //@Note value 3 may be blinking
-Number Nilan_Display_LED_2            "User panel indicator light2 [%d]"  <light> (gNilan) {modbus="nilan_input_userpanel:1"}
+Switch Nilan_Display_LED_1            "User panel indicator light"        <light> (gNilan) {modbus="nilan_input_userpanel:0"}
+Switch Nilan_Display_LED_2            "User panel indicator light2"       <light> (gNilan) {modbus="nilan_input_userpanel:1"}
 String Nilan_Display_Text_1_2         "Text line 1 character 1-2 [%s]"            (gNilan) {modbus="nilan_input_userpanel:2"}
 String Nilan_Display_Text_3_4         "Text line 1 character 3-4 [%s]"            (gNilan) {modbus="nilan_input_userpanel:3"}
 String Nilan_Display_Text_5_6         "Text line 1 character 5-6 [%s]"            (gNilan) {modbus="nilan_input_userpanel:4"}
@@ -85,32 +84,32 @@ Number Nilan_Display_Attr_9_16        "Text line 2 flags [%d]"                  
 
 Number Nilan_Bus_Address              "Protocol node address (default = 30) [%d]" (gNilan) {modbus="nilan_holding_device:0"}
 
-Number Nilan_Output_AirFlap           "Air flap [MAP(zero_one__to__closed_open.map):%s]"          <flap>      (gNilan) {modbus="nilan_holding_discreteio:0"}
-Number Nilan_Output_SmokeFlap         "Fire/Smoke flap [MAP(zero_one__to__closed_open.map):%s]"   <flap>      (gNilan) {modbus="nilan_holding_discreteio:1"}
-Number Nilan_Output_BypassOpen        "Bypass flap open [MAP(zero_one__to__closed_open.map):%s]"  <flap>      (gNilan) {modbus="nilan_holding_discreteio:2"}
-Number Nilan_Output_BypassClose       "Bypass flap close [MAP(zero_one__to__closed_open.map):%s]" <flap>      (gNilan) {modbus="nilan_holding_discreteio:3"}
-Number Nilan_Output_AirCircPump       "Air heat circulation pump [%d]"                            <pump>      (gNilan) {modbus="nilan_holding_discreteio:4"}
-Number Nilan_Output_AirHeatAllo       "Air heating selected [%d]"                                 <flowpipe>  (gNilan) {modbus="nilan_holding_discreteio:5"}
-Number Nilan_Output_AirHeat_1         "Air heater relays [%d]"                                                (gNilan) {modbus="nilan_holding_discreteio:6"}
-Number Nilan_Output_AirHeat_2         "Air heater relays [%d]"                                                (gNilan) {modbus="nilan_holding_discreteio:7"}
-Number Nilan_Output_AirHeat_3         "Air heater relays [%d]"                                                (gNilan) {modbus="nilan_holding_discreteio:8"}
-Number Nilan_Output_Compressor        "Compressor [MAP(nilan_on_off.map):%s]"                     <pump>      (gNilan) {modbus="nilan_holding_discreteio:9"}
-Number Nilan_Output_Compressor2       "Compressor 2 [MAP(nilan_on_off.map):%s]"                   <pump>      (gNilan) {modbus="nilan_holding_discreteio:10"}
-Number Nilan_Output_4WayCool          "4-way valve [%d]"                                                      (gNilan) {modbus="nilan_holding_discreteio:11"}
-Number Nilan_Output_HotgasHeat        "Hotgas valve - heat [%d]"                                              (gNilan) {modbus="nilan_holding_discreteio:12"}
-Number Nilan_Output_HotgasCool        "Hotgas valve - cool [%d]"                                              (gNilan) {modbus="nilan_holding_discreteio:13"}
-Number Nilan_Output_CondOpen          "Air condenser active [%d]"                                             (gNilan) {modbus="nilan_holding_discreteio:14"}
-Number Nilan_Output_CondClose         "Air condenser inactive [%d]"                                           (gNilan) {modbus="nilan_holding_discreteio:15"}
-Number Nilan_Output_WaterHeat         "Hot water heater [MAP(nilan_on_off.map):%s]"               <heating>   (gNilan) {modbus="nilan_holding_discreteio:16"}
-Number Nilan_Output_3WayValve         "Hot water 3-way valve [%d]"                                            (gNilan) {modbus="nilan_holding_discreteio:17"}
-Number Nilan_Output_CenCircPump       "EK circulation pump [%d]"                                  <pump>      (gNilan) {modbus="nilan_holding_discreteio:18"}
-Number Nilan_Output_CenHeat_1         "EK heater relays [%d]"                                                 (gNilan) {modbus="nilan_holding_discreteio:19"}
-Number Nilan_Output_CenHeat_2         "EK heater relays [%d]"                                                 (gNilan) {modbus="nilan_holding_discreteio:20"}
-Number Nilan_Output_CenHeat_3         "EK heater relays [%d]"                                                 (gNilan) {modbus="nilan_holding_discreteio:21"}
-Number Nilan_Output_CenHeatExt        "External radiator heat [%d]"                                           (gNilan) {modbus="nilan_holding_discreteio:22"}
-Number Nilan_Output_UserFunc          "User function active [MAP(nilan_on_off.map):%s]"           <boy_3>     (gNilan) {modbus="nilan_holding_discreteio:23"}
-Number Nilan_Output_UserFunc_2        "User function active [%d]"                                             (gNilan) {modbus="nilan_holding_discreteio:24"}
-Number Nilan_Output_Defrosting        "Defrost function active [%d]"                              <flap>      (gNilan) {modbus="nilan_holding_discreteio:25"}
+Contact Nilan_Output_AirFlap          "Air flap [%s]"                   <contact>   (gNilan) {modbus="nilan_holding_discreteio:0"}
+Contact Nilan_Output_SmokeFlap        "Fire/Smoke flap [%s]"            <contact>   (gNilan) {modbus="nilan_holding_discreteio:1"}
+Contact Nilan_Output_BypassOpen       "Bypass flap open [%s]"           <contact>   (gNilan) {modbus="nilan_holding_discreteio:2"}
+Contact Nilan_Output_BypassClose      "Bypass flap close [%s]"          <contact>   (gNilan) {modbus="nilan_holding_discreteio:3"}
+Number  Nilan_Output_AirCircPump      "Air heat circulation pump [%d]"  <pump>      (gNilan) {modbus="nilan_holding_discreteio:4"}
+Number  Nilan_Output_AirHeatAllo      "Air heating selected [%d]"       <flowpipe>  (gNilan) {modbus="nilan_holding_discreteio:5"}
+Number  Nilan_Output_AirHeat_1        "Air heater relays [%d]"                      (gNilan) {modbus="nilan_holding_discreteio:6"}
+Number  Nilan_Output_AirHeat_2        "Air heater relays [%d]"                      (gNilan) {modbus="nilan_holding_discreteio:7"}
+Number  Nilan_Output_AirHeat_3        "Air heater relays [%d]"                      (gNilan) {modbus="nilan_holding_discreteio:8"}
+Switch  Nilan_Output_Compressor       "Compressor"                      <pump>      (gNilan) {modbus="nilan_holding_discreteio:9"}
+Switch  Nilan_Output_Compressor2      "Compressor 2"                    <pump>      (gNilan) {modbus="nilan_holding_discreteio:10"}
+Number  Nilan_Output_4WayCool         "4-way valve [%d]"                            (gNilan) {modbus="nilan_holding_discreteio:11"}
+Number  Nilan_Output_HotgasHeat       "Hotgas valve - heat [%d]"                    (gNilan) {modbus="nilan_holding_discreteio:12"}
+Number  Nilan_Output_HotgasCool       "Hotgas valve - cool [%d]"                    (gNilan) {modbus="nilan_holding_discreteio:13"}
+Number  Nilan_Output_CondOpen         "Air condenser active [%d]"                   (gNilan) {modbus="nilan_holding_discreteio:14"}
+Number  Nilan_Output_CondClose        "Air condenser inactive [%d]"                 (gNilan) {modbus="nilan_holding_discreteio:15"}
+Switch  Nilan_Output_WaterHeat        "Hot water heater"                <heating>   (gNilan) {modbus="nilan_holding_discreteio:16"}
+Number  Nilan_Output_3WayValve        "Hot water 3-way valve [%d]"                  (gNilan) {modbus="nilan_holding_discreteio:17"}
+Number  Nilan_Output_CenCircPump      "EK circulation pump [%d]"        <pump>      (gNilan) {modbus="nilan_holding_discreteio:18"}
+Number  Nilan_Output_CenHeat_1        "EK heater relays [%d]"                       (gNilan) {modbus="nilan_holding_discreteio:19"}
+Number  Nilan_Output_CenHeat_2        "EK heater relays [%d]"                       (gNilan) {modbus="nilan_holding_discreteio:20"}
+Number  Nilan_Output_CenHeat_3        "EK heater relays [%d]"                       (gNilan) {modbus="nilan_holding_discreteio:21"}
+Number  Nilan_Output_CenHeatExt       "External radiator heat [%d]"                 (gNilan) {modbus="nilan_holding_discreteio:22"}
+Switch  Nilan_Output_UserFunc         "User function active"            <boy_2>     (gNilan) {modbus="nilan_holding_discreteio:23"}
+Switch  Nilan_Output_UserFunc_2       "User function 2 active"          <boy_2>     (gNilan) {modbus="nilan_holding_discreteio:24"}
+Switch  Nilan_Output_Defrosting       "Defrost function active"         <climate>   (gNilan) {modbus="nilan_holding_discreteio:25"}
 
 Number Nilan_Output_ExhaustSpeed      "Exhaust fan speed [%.0f %%]"               <fan>     (gNilan) {modbus="<[nilan_holding_analogio:0:transformation=JS(divide100.js)], >[nilan_holding_analogio:0:transformation=JS(multiply100.js)]"}
 Number Nilan_Output_InletSpeed        "Inlet fan speed [%.0f %%]"                 <fan>     (gNilan) {modbus="<[nilan_holding_analogio:1:transformation=JS(divide100.js)], >[nilan_holding_analogio:1:transformation=JS(multiply100.js)]"}
@@ -126,26 +125,26 @@ Number Nilan_Time_Day                 "Day [%d]"      <calendar>  (gNilan) {modb
 Number Nilan_Time_Month               "Month [%d]"    <calendar>  (gNilan) {modbus="nilan_holding_time:4"}
 Number Nilan_Time_Year                "Year [%d]"     <calendar>  (gNilan) {modbus="nilan_holding_time:5"}
 
-Number Nilan_Alarm_Reset              "Clear one specific alarm code or all [%d]" (gNilan) {modbus="nilan_holding_alarm:0"}
+Number Nilan_Alarm_Reset              "Clear one specific alarm code or all [%d]"                      <keyring>       (gNilan) {modbus="nilan_holding_alarm:0"}
 
 Number Nilan_Program_Select           "Week program nb. select [MAP(nilan_program_select.map):%s]"     <calendar>      (gNilan,gNilanProgram) {modbus="nilan_holding_weekprogram:0"}
 
-Number Nilan_Program_UserFuncAct      "User function active (See UserFuncSet) [%d]"                    <boy_2>         (gNilan,gNilanProgram) {modbus="nilan_holding_user1functions:0"}
+Switch Nilan_Program_UserFuncAct      "User function active"                                           <boy_2>         (gNilan,gNilanProgram) {modbus="nilan_holding_user1functions:0"}
 Number Nilan_Program_UserFuncSet      "User function select [MAP(nilan_program_userfuncset.map):%s]"   <settings>      (gNilan,gNilanProgram) {modbus="nilan_holding_user1functions:1"}
 Number Nilan_Program_UserTimeSet      "Min User function period [%d]"                                  <clock>         (gNilan,gNilanProgram) {modbus="nilan_holding_user1functions:2"}
 Number Nilan_Program_UserVentSet      "Step User function ventilation [MAP(nilan_ventset.map):%s]"     <fan_ceiling>   (gNilan,gNilanProgram) {modbus="nilan_holding_user1functions:3"}
 Number Nilan_Program_UserTempSet      "User function temperature (Extend function only) [%.1f °C]"     <temperature>   (gNilan,gNilanProgram) {modbus="nilan_holding_user1functions:4"}
 Number Nilan_Program_UserOffsSet      "User function temperature(Offset function only) [%.1f °C]"      <temperature>   (gNilan,gNilanProgram) {modbus="nilan_holding_user1functions:5"}
 
-Number Nilan_Program_User2FuncAct     "User function active (See UserFuncSet2) [%d]"                   <boy_2>         (gNilan,gNilanProgram) {modbus="nilan_holding_user2functions:0"}
-Number Nilan_Program_User2FuncSet     "User function select [MAP(nilan_program_userfuncset.map):%s]"   <settings>      (gNilan,gNilanProgram) {modbus="nilan_holding_user2functions:1"}
-Number Nilan_Program_User2TimeSet     "Min User function period [%d]"                                  <clock>         (gNilan,gNilanProgram) {modbus="nilan_holding_user2functions:2"}
-Number Nilan_Program_User2VentSet     "Step User function ventilation [MAP(nilan_ventset.map):%s]"     <fan_ceiling>   (gNilan,gNilanProgram) {modbus="nilan_holding_user2functions:3"}
-Number Nilan_Program_User2TempSet     "User function temperature (Extend function only) [%.1f °C]"     <temperature>   (gNilan,gNilanProgram) {modbus="nilan_holding_user2functions:4"}
-Number Nilan_Program_User2OffsSet     "User function temperature(Offset function only) [%.1f °C]"      <temperature>   (gNilan,gNilanProgram) {modbus="nilan_holding_user2functions:5"}
+Switch Nilan_Program_User2FuncAct     "User function 2 active"                                         <boy_2>         (gNilan,gNilanProgram) {modbus="nilan_holding_user2functions:0"}
+Number Nilan_Program_User2FuncSet     "User function 2 select [MAP(nilan_program_userfuncset.map):%s]" <settings>      (gNilan,gNilanProgram) {modbus="nilan_holding_user2functions:1"}
+Number Nilan_Program_User2TimeSet     "Min User function 2 period [%d]"                                <clock>         (gNilan,gNilanProgram) {modbus="nilan_holding_user2functions:2"}
+Number Nilan_Program_User2VentSet     "Step User function 2 ventilation [MAP(nilan_ventset.map):%s]"   <fan_ceiling>   (gNilan,gNilanProgram) {modbus="nilan_holding_user2functions:3"}
+Number Nilan_Program_User2TempSet     "User function 2 temperature (Extend function only) [%.1f °C]"   <temperature>   (gNilan,gNilanProgram) {modbus="nilan_holding_user2functions:4"}
+Number Nilan_Program_User2OffsSet     "User function 2 temperature(Offset function only) [%.1f °C]"    <temperature>   (gNilan,gNilanProgram) {modbus="nilan_holding_user2functions:5"}
 
 Number Nilan_Control_Type             "Machine type select [%d]"                                                       (gNilan) {modbus="nilan_holding_control:0"}
-Switch Nilan_Control_RunSet           "User on / off select [%s]"                                      <switch>        (gNilan) {modbus="nilan_holding_control:1"}
+Switch Nilan_Control_RunSet           "User on / off select"                                           <switch>        (gNilan) {modbus="nilan_holding_control:1"}
 Number Nilan_Control_ModeSet          "User operation mode select [MAP(nilan_control_modeact.map):%s]" <settings>      (gNilan) {modbus="nilan_holding_control:2"}
 Number Nilan_Control_VentSet          "User ventilation step select [MAP(nilan_ventset.map):%s]"       <fan_ceiling>   (gNilan) {modbus="nilan_holding_control:3"}
 Number Nilan_Control_TempSet          "User temperature setpoint [%.1f °C]"                            <temperature>   (gNilan) {modbus="<[nilan_holding_control:4:transformation=JS(divide100.js)], >[nilan_holding_control:4:transformation=JS(multiply100.js)]"}

@@ -1,7 +1,7 @@
 sitemap main label="Main Menu"
 {
 	Frame label="Weltenempfänger" {
-		Text item=CurrDateTime label="Wetter und Astro" icon="sun_clouds" {
+		Text label="Wetter und Astro" icon="sun_clouds" {
 			Frame label="Jetzt" {
 		                Text item=SunriseTime icon="sunrise"
                 		Text item=SunsetTime icon="sunset" 
@@ -35,7 +35,7 @@ sitemap main label="Main Menu"
 				Switch item=Nilan_Control_VentSet label="Lüfterstufe" mappings=[0="Off", 1="1", 2="2", 3="3", 4="4"]
 				Setpoint item=Nilan_Output_ExhaustSpeed label="Absauggeschwindigkeit [%.0f %%]"
 				Setpoint item=Nilan_Output_InletSpeed label="Einlassgeschwindigkeit [%.0f %%]"
-				Selection item=Nilan_Output_UserFunc label="Überdruck für Feuerstätte" mappings=[0="nicht aktiv", 1="aktiv"] icon="fire"
+				Selection item=Nilan_Output_UserFunc label="Überdruck für Feuerstätte" mappings=[OFF="nicht aktiv", ON="aktiv"] icon="fire"
 				//Switch item=Nilan_Output_UserFunc_2
 			}
 
@@ -57,8 +57,8 @@ sitemap main label="Main Menu"
 			Frame label="Status" {
 
 				Text item=Nilan_Display_LED_1 label="Alarme" icon="light" {	
-					Selection item=Nilan_Display_LED_1 label="Bedienpanel LED" mappings=[0="Off", 1="On"]
-					//Selection item=Nilan_Display_LED_2
+					Switch item=Nilan_Display_LED_1 label="Bedienpanel LED"
+					//Switch item=Nilan_Display_LED_2
 					Selection item=Nilan_Alarm_Reset label="Alarm-Code zurücksetzen" 
 						mappings=[
 							0="No command",
@@ -71,37 +71,112 @@ sitemap main label="Main Menu"
 							//...
 						    255="Clear all alarms"
 						]
-					Selection item=Nilan_Input_AirFilter label="Luftfilter-Alarm" mappings=[0="OK", 1="Alarm"]
-					Selection item=Nilan_Input_DoorOpen label="Türkontakt" mappings=[0="Closed", 1="Open"] 
-					Selection item=Nilan_Input_Smoke label="Feuer- / Rauchalarm" mappings=[0="OK", 1="Alarm"] 
-					Selection item=Nilan_Input_MotorThermo label="Motor-Thermo-Sicherung" mappings=[0="OK", 1="Burned"] 
-					Selection item=Nilan_Input_Frost_Overht label="Frost / Überhitzung" mappings=[0="OK", 1="Alarm"] 
-					Selection item=Nilan_Input_AirFlow label="Luftstromüberwachung" mappings=[0="OK", 1="Alarm"]      
-					Selection item=Nilan_Input_P_HI label="Überdruckventil" mappings=[0="OK", 1="Alarm"] 
-					Selection item=Nilan_Input_Defrost label="Enteisungsthermostat" mappings=[0="OK", 1="Alarm"] 
+					Selection item=Nilan_Input_AirFilter label="Luftfilter-Alarm" mappings=[OFF="OK", ON="Alarm"]
+					Switch    item=Nilan_Input_DoorOpen label="Türkontakt"
+					Selection item=Nilan_Input_Smoke label="Feuer- / Rauchalarm" mappings=[OFF="OK", ON="Alarm"] 
+					Selection item=Nilan_Input_MotorThermo label="Motor-Thermo-Sicherung" mappings=[OFF="OK", ON="Burned"] 
+					Selection item=Nilan_Input_Frost_Overht label="Frost / Überhitzung" mappings=[OFF="OK", ON="Alarm"] 
+					Selection item=Nilan_Input_AirFlow label="Luftstromüberwachung" mappings=[OFF="OK", ON="Alarm"]      
+					Selection item=Nilan_Input_P_HI label="Überdruckventil" mappings=[OFF="OK", ON="Alarm"] 
+					Selection item=Nilan_Input_Defrost label="Enteisungsthermostat" mappings=[OFF="OK", ON="Alarm"] 
 				
 					Text item=Nilan_Alarm_Status label="Alarm-Code (Bitmask)"
 					//Bitmaks: 0x80 : Active / 0x03 : Nb. of alarms
 
-					Text item=Nilan_Alarm_List_1_ID label="Alarm 1 - Code [%d]" visibility=[Nilan_Alarm_List_1_ID>=1]
-					Text item=Nilan_Alarm_List_1_Date label="Alarm 1 - Date [%d]" visibility=[Nilan_Alarm_List_1_ID>=1] 
-					Text item=Nilan_Alarm_List_1_Time label="Alarm 1 - Time [%d]" visibility=[Nilan_Alarm_List_1_ID>=1]
-					Text item=Nilan_Alarm_List_2_ID label="Alarm 2 - Code [%d]" visibility=[Nilan_Alarm_List_2_ID>=1]
-					Text item=Nilan_Alarm_List_2_Date label="Alarm 2 - Date [%d]" visibility=[Nilan_Alarm_List_2_ID>=1]
-					Text item=Nilan_Alarm_List_2_Time label="Alarm 2 - Time [%d]" visibility=[Nilan_Alarm_List_2_ID>=1]
-					Text item=Nilan_Alarm_List_3_ID label="Alarm 3 - Code [%d]" visibility=[Nilan_Alarm_List_3_ID>=1]
-					Text item=Nilan_Alarm_List_3_Date label="Alarm 3 - Date [%d]" visibility=[Nilan_Alarm_List_3_ID>=1]
-					Text item=Nilan_Alarm_List_3_Time label="Alarm 3 - Time [%d]" visibility=[Nilan_Alarm_List_3_ID>=1]
+					Selection item=Nilan_Alarm_List_1_ID label="Alarm 1 - Code" visibility=[Nilan_Alarm_List_1_ID>=1]
+                        mappings=[
+                            0="None",
+                            1="Hardware controller fault",
+                            2="Warning alarm went critical",
+                            3="Fire",
+                            7="Frost 07",
+                            8="Frost 08",
+                            9="Overtemp",
+                            10="Overheat",
+                            11="Airflow",
+                            15="Room temp low",
+                            16="Control Software Err",
+                            17="Control Software Watchdog",
+                            18="Default settings reset",
+                            19="Inspect filters",
+                            21="Power failure detected",
+                            22="Heatup impossible",
+                            27="Shorted temp sensor",
+                            57="Shorted temp sensor",
+                            28="Disconnected temp sensor",
+                            58="Disconnected temp sensor",
+                            71="Max defrost time exceeded",
+                            91="Accessories circuit board",
+                            92="Electric adjustents write Err"
+                        ] 
+					Text item=Nilan_Alarm_List_1_Date label="Alarm 1 - Date [%s]" visibility=[Nilan_Alarm_List_1_ID>=1] 
+					Text item=Nilan_Alarm_List_1_Time label="Alarm 1 - Time [%s Uhr]" visibility=[Nilan_Alarm_List_1_ID>=1]
+					Selection item=Nilan_Alarm_List_2_ID label="Alarm 2 - Code" visibility=[Nilan_Alarm_List_2_ID>=1]
+                        mappings=[
+                            0="None",
+                            1="Hardware controller fault",
+                            2="Warning alarm went critical",
+                            3="Fire",
+                            7="Frost 07",
+                            8="Frost 08",
+                            9="Overtemp",
+                            10="Overheat",
+                            11="Airflow",
+                            15="Room temp low",
+                            16="Control Software Err",
+                            17="Control Software Watchdog",
+                            18="Default settings reset",
+                            19="Inspect filters",
+                            21="Power failure detected",
+                            22="Heatup impossible",
+                            27="Shorted temp sensor",
+                            57="Shorted temp sensor",
+                            28="Disconnected temp sensor",
+                            58="Disconnected temp sensor",
+                            71="Max defrost time exceeded",
+                            91="Accessories circuit board",
+                            92="Electric adjustents write Err"
+                        ] 
+					Text item=Nilan_Alarm_List_2_Date label="Alarm 2 - Date [%s]" visibility=[Nilan_Alarm_List_2_ID>=1]
+					Text item=Nilan_Alarm_List_2_Time label="Alarm 2 - Time [%s Uhr]" visibility=[Nilan_Alarm_List_2_ID>=1]
+					Selection item=Nilan_Alarm_List_3_ID label="Alarm 3 - Code" visibility=[Nilan_Alarm_List_3_ID>=1]
+                        mappings=[
+                            0="None",
+                            1="Hardware controller fault",
+                            2="Warning alarm went critical",
+                            3="Fire",
+                            7="Frost 07",
+                            8="Frost 08",
+                            9="Overtemp",
+                            10="Overheat",
+                            11="Airflow",
+                            15="Room temp low",
+                            16="Control Software Err",
+                            17="Control Software Watchdog",
+                            18="Default settings reset",
+                            19="Inspect filters",
+                            21="Power failure detected",
+                            22="Heatup impossible",
+                            27="Shorted temp sensor",
+                            57="Shorted temp sensor",
+                            28="Disconnected temp sensor",
+                            58="Disconnected temp sensor",
+                            71="Max defrost time exceeded",
+                            91="Accessories circuit board",
+                            92="Electric adjustents write Err"
+                        ]
+					Text item=Nilan_Alarm_List_3_Date label="Alarm 3 - Date [%s]" visibility=[Nilan_Alarm_List_3_ID>=1]
+					Text item=Nilan_Alarm_List_3_Time label="Alarm 3 - Time [%s Uhr]" visibility=[Nilan_Alarm_List_3_ID>=1]
 					
 					Selection item=Nilan_Control_ServiceMode label="Service-Modus" mappings=[0="Off", 1="Defrost", 2="Flaps", 3="Inlet", 4="Exhaust", 5="Compressor", 6="Heating", 7="Hot water", 8="Central heat"]	
 				}
 
-				Text item=Nilan_Output_BypassOpen label="Bypass Status" icon="flap" {
-					Switch item=Nilan_Output_AirFlap label="Luftklappe" mappings=[0=Closed, 1=Open]
-					Switch item=Nilan_Output_SmokeFlap label="Feuer-/Rauchklappe" mappings=[0=Closed, 1=Open]
-					Switch item=Nilan_Output_BypassOpen label="Bypass offen" mappings=[0=Closed, 1=Open]
-					Switch item=Nilan_Output_BypassClose label="Bypass zu" mappings=[0=Closed, 1=Open]
-					Switch item=Nilan_Output_Defrosting label="Enteisung" mappings=[0=Off, 1=On]
+				Text item=Nilan_Output_BypassOpen label="Bypass Status" icon="contact" {
+					Switch item=Nilan_Output_AirFlap label="Luftklappe" mappings=[CLOSED=Closed, OPEN=Open]
+					Switch item=Nilan_Output_SmokeFlap label="Feuer-/Rauchklappe" mappings=[CLOSED=Closed, OPEN=Open]
+					Switch item=Nilan_Output_BypassOpen label="Bypass offen" mappings=[CLOSED=Closed, OPEN=Open]
+					Switch item=Nilan_Output_BypassClose label="Bypass zu" mappings=[CLOSED=Closed, OPEN=Open]
+					Switch item=Nilan_Output_Defrosting label="Enteisung" mappings=[OFF=Off, ON=On]
             	}
 			}
 
@@ -166,7 +241,7 @@ sitemap main label="Main Menu"
 				Selection item=Nilan_Program_Select label="Wochenprogramm" mappings=[0="None", 1="Program 1", 2="Program 2", 3="Program 3", 4="Erase"]
 				
 				Text label="Benutzerfunktion 1" icon="boy_2" {
-					Selection item=Nilan_Program_UserFuncAct label="Status (Überdruck für Feuerstätte)" mappings=[0="nicht aktiv", 1="aktiv"] icon="fire"
+					Selection item=Nilan_Program_UserFuncAct label="Status (Überdruck für Feuerstätte)" mappings=[OFF="nicht aktiv", ON="aktiv"] icon="fire"
 					Selection item=Nilan_Program_UserFuncSet label="Funktion" mappings=[0="None", 1="Extend", 2="Inlet", 3="Exhaust", 4="External heater offset", 5="Ventilate"]
 					Setpoint item=Nilan_Program_UserTimeSet label="Dauer [%d min.]" minValue=0 maxValue=65000 step=1 
 					Selection item=Nilan_Program_UserVentSet label="Lüfterstufe" mappings=[0="Off", 1="1", 2="2", 3="3", 4="4"]	
@@ -175,7 +250,7 @@ sitemap main label="Main Menu"
 				}
 
 				Text label="Benutzerfunktion 2" icon="boy_2" {
-					Selection item=Nilan_Program_User2FuncAct	label="Status" mappings=[0="nicht aktiv", 1="aktiv"]
+					Selection item=Nilan_Program_User2FuncAct	label="Status" mappings=[OFF="nicht aktiv", ON="aktiv"]
 					Selection item=Nilan_Program_User2FuncSet label="Funktion" mappings=[0="None", 1="Extend", 2="Inlet", 3="Exhaust", 4="External heater offset", 5="Ventilate"]	
 					Setpoint item=Nilan_Program_User2TimeSet label="Dauer [%d min.]" minValue=0 maxValue=65000 step=1 
 					Selection item=Nilan_Program_User2VentSet label="Lüfterstufe" mappings=[0="Off", 1="1", 2="2", 3="3", 4="4"]
