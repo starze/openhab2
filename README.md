@@ -13,6 +13,14 @@ Configuration files for my openHAB2 installation. Including Modbus communication
 * [Product documentation](http://www.nilan.de/startseite/losungen/wohnungslosungen/luftung/comfort-serien/comfort-300-top)
 * [Modbus documentation](http://reader.livedition.dk/nilan/272/)
 
+### Harmony Hub Binding
+
+* [Harmony Hub Binding documentation](https://www.openhab.org/addons/bindings/harmonyhub/)
+
+### Kodi Binding
+
+* [Kodi Binding documentation](https://www.openhab.org/addons/bindings/kodi/)
+
 ## Installed Persistence
 
 * [RRD4j Persistence](http://docs.openhab.org/addons/persistence/rrd4j/readme.html)
@@ -21,6 +29,14 @@ Configuration files for my openHAB2 installation. Including Modbus communication
 
 * [Map Transformation](https://github.com/openhab/openhab1-addons/wiki/Transformations)
 * [Javascript Transformation](https://github.com/openhab/openhab1-addons/wiki/Transformations)
+
+## Installed UIs
+
+* Basic UI
+* HABot
+* HABPanel
+* Home Builder
+* Paper UI
 
 ## Quick Setup
 
