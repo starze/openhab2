@@ -1,0 +1,3 @@
+String HarmonyActivity              "Current Activity"       (gMain) { channel="harmonyhub:hub:HarmonyHub:currentActivity" }
+String HarmonyKennwood              "Kennwood"               (gMain) { channel="harmonyhub:device:HarmonyHub:46184638:buttonPress" }
+

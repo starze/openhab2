@@ -1,0 +1,27 @@
+
+Switch kodi_mute                  "Mute"                    <soundvolume>  { channel="kodi:kodi:8df5fb50:mute" }
+Dimmer kodi_volume                "Volume [%d]"             <soundvolume>  { channel="kodi:kodi:8df5fb50:volume" }
+Player kodi_control               "Control"                                { channel="kodi:kodi:8df5fb50:control" }
+Switch kodi_stop                  "Stop"                                   { channel="kodi:kodi:8df5fb50:stop" }
+String kodi_title                 "Title [%s]"                             { channel="kodi:kodi:8df5fb50:title" }
+String kodi_showtitle             "Show title [%s]"                        { channel="kodi:kodi:8df5fb50:showtitle" }
+String kodi_album                 "Album [%s]"                             { channel="kodi:kodi:8df5fb50:album" }
+String kodi_artist                "Artist [%s]"                            { channel="kodi:kodi:8df5fb50:artist" }
+String kodi_playuri               "Play URI"                               { channel="kodi:kodi:8df5fb50:playuri" }
+String kodi_playfavorite          "Play favorite"                          { channel="kodi:kodi:8df5fb50:playfavorite" }
+String kodi_pvropentv             "Play PVR TV channel"                    { channel="kodi:kodi:8df5fb50:pvr-open-tv" }
+String kodi_pvropenradio          "Play PVR Radio channel"                 { channel="kodi:kodi:8df5fb50:pvr-open-radio" }
+String kodi_pvrchannel            "PVR channel [%s]"                       { channel="kodi:kodi:8df5fb50:pvr-channel" }
+String kodi_notification          "Notification"                           { channel="kodi:kodi:8df5fb50:shownotification" }
+String kodi_input                 "Input"                     { channel="kodi:kodi:8df5fb50:input" }
+String kodi_inputtext             "Inputtext"                 { channel="kodi:kodi:8df5fb50:inputtext" }
+String kodi_inputaction           "InputAction"               { channel="kodi:kodi:8df5fb50:inputaction" }
+String kodi_systemcommand         "Systemcommand"             { channel="kodi:kodi:8df5fb50:systemcommand" }
+String kodi_mediatype             "Mediatype [%s]"            { channel="kodi:kodi:8df5fb50:mediatype" }
+String kodi_genrelist             "Genres [%s]"               { channel="kodi:kodi:8df5fb50:genreList" }
+Image  kodi_thumbnail                                         { channel="kodi:kodi:8df5fb50:thumbnail" }
+Image  kodi_fanart                                            { channel="kodi:kodi:8df5fb50:fanart" }
+Number:Time kodi_currenttime      "Current Time [%d %unit%]"  { channel="kodi:kodi:8df5fb50:currenttime" }
+Number:Dimensionless kodi_ctp     "Current Time [%d %unit%]"  { channel="kodi:kodi:8df5fb50:currenttimepercentage" }
+Number:Time kodi_duration         "Duration [%d %unit%]"      { channel="kodi:kodi:8df5fb50:duration" }
+String kodi_playnotification      "Play notification URI"     { channel="kodi:kodi:8df5fb50:playnotification" }
