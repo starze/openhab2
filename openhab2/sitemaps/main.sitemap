@@ -51,7 +51,7 @@ sitemap main label="Main Menu"
             }
 	}
 
-	Frame label="Heizung und Lüftung" {
+        Frame label="Heizung und Lüftung" {
 		Text icon="fan" label="Nilan Lüftungsanlage" {
  			Frame label="Übersicht" {
 				Text item=nilan_generated_time {
@@ -72,6 +72,14 @@ sitemap main label="Main Menu"
 				Setpoint item=Nilan_Output_InletSpeed label="Einlassgeschwindigkeit [%.0f %%]"
 				Selection item=Nilan_Output_UserFunc label="Überdruck für Feuerstätte" mappings=[OFF="nicht aktiv", ON="aktiv"] icon="fire"
 				//Switch item=Nilan_Output_UserFunc_2
+        			Switch item=Relay_Gardenlight label="Gartenlicht"
+        			Switch item=Relay_Fountain label="Brunnen"
+        			Switch item=Relay_3
+        			Switch item=Relay_4
+        			Switch item=Relay_5
+        			Switch item=Relay_6
+        			Switch item=Relay_7
+        			Switch item=Relay_8
 			}
 
 			Frame label="Sensoren" {

@@ -17,6 +17,10 @@ Configuration files for my openHAB2 installation. Including Modbus communication
 
 * [Harmony Hub Binding documentation](https://www.openhab.org/addons/bindings/harmonyhub/)
 
+### GPIO Binding
+
+* [GPIO Binding documentation](https://www.openhab.org/addons/bindings/gpio1/)
+
 ### Kodi Binding
 
 * [Kodi Binding documentation](https://www.openhab.org/addons/bindings/kodi/)

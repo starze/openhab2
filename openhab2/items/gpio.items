@@ -1,0 +1,9 @@
+
+Switch    Relay_Gardenlight  "Garden light"  <light>             (gGpio) { gpio="pin:5 activelow:yes initialValue:high force:yes" }
+Switch    Relay_Fountain     "Fountain"      <faucet>            (gGpio) { gpio="pin:6 activelow:yes initialValue:high force:yes" }
+Switch    Relay_3            "R3"            <poweroutlet_eu>    (gGpio) { gpio="pin:13 activelow:yes initialValue:high force:yes" }
+Switch    Relay_4            "R4"            <poweroutlet_eu>    (gGpio) { gpio="pin:19 activelow:yes initialValue:high force:yes" }
+Switch    Relay_5            "R5"            <poweroutlet_eu>    (gGpio) { gpio="pin:26 activelow:yes initialValue:high force:yes" }
+Switch    Relay_6            "R6"            <poweroutlet_eu>    (gGpio) { gpio="pin:16 activelow:yes initialValue:high force:yes" }
+Switch    Relay_7            "R7"            <poweroutlet_eu>    (gGpio) { gpio="pin:20 activelow:yes initialValue:high force:yes" }
+Switch    Relay_8            "R8"            <poweroutlet_eu>    (gGpio) { gpio="pin:21 activelow:yes initialValue:high force:yes" }
