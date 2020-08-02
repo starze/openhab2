@@ -72,14 +72,17 @@ sitemap main label="Main Menu"
 				Setpoint item=Nilan_Output_InletSpeed label="Einlassgeschwindigkeit [%.0f %%]"
 				Selection item=Nilan_Output_UserFunc label="Überdruck für Feuerstätte" mappings=[OFF="nicht aktiv", ON="aktiv"] icon="fire"
 				//Switch item=Nilan_Output_UserFunc_2
-        			Switch item=Relay_Gardenlight label="Gartenlicht"
-        			Switch item=Relay_Fountain label="Brunnen"
-//        			Switch item=Relay_3
-//        			Switch item=Relay_4
-//        			Switch item=Relay_5
-//        			Switch item=Relay_6
-//        			Switch item=Relay_7
-//        			Switch item=Relay_8
+                        }
+
+                        Frame label="Garten" {
+        			//Switch item=Relay_1 label="Gartenlicht"
+        			Switch item=Relay_7 label="Gartenlicht"
+        			Switch item=Relay_2 label="Brunnen"
+        			Switch item=Relay_3 label="Tiefhoflicht 1"
+        			Switch item=Relay_4 label="Tiefhoflicht 2"
+        			Switch item=Relay_5 label="Tiefhoflicht 3"
+        			Switch item=Relay_6 label="Gartensteckdosen West"
+        			Switch item=Relay_8 label="Zisternenpumpe"
 			}
 
 			Frame label="Sensoren" {
