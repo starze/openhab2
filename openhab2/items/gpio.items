@@ -6,4 +6,4 @@ Switch    Relay_4            "R4"            <light>             (gGpio) { gpio=
 Switch    Relay_5            "R5"            <light>             (gGpio) { gpio="pin:26 activelow:yes initialValue:high force:yes" }
 Switch    Relay_6            "R6"            <poweroutlet_eu>    (gGpio) { gpio="pin:16 activelow:yes initialValue:high force:yes" }
 Switch    Relay_7            "R7"            <light>             (gGpio) { gpio="pin:20 activelow:yes initialValue:high force:yes" }
-Switch    Relay_8            "R8"            <cistern>           (gGpio) { gpio="pin:21 activelow:yes initialValue:high force:yes" }
+Switch    Relay_8            "R8"            <cistern>           (gGpio) { gpio="pin:21 activelow:yes initialValue:low force:yes" }
